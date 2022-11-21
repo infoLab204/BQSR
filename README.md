@@ -80,7 +80,9 @@ list of subdirectories created under directory “species_name”
 (note) move downloaded FASTQ, references, dbSNPs files into the above directories of fastq, refer, and db, respectively 
 
 <br>
+
 ### 3. created files for alignment into subdirectory “refer”.
+
 ```
 gatk.pre_align(“species_name”, “reference_file”)
 ```
