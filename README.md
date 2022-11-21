@@ -33,10 +33,10 @@ install following tools and download FASTQ, references, dbSNPs, and Pseudo-datab
 *	chickpea : https://ftp.ncbi.nih.gov/snp/organisms/archive/chickpea_3827/VCF/
 
 ### Pseudo-database
-*	human : http://114.71.251.214/BQSR/human/human_pseudoDB.vcf.gz
-*	sheep : http://114.71.251.214/BQSR/sheep/sheep_pseudoDB.vcf.gz
-*	rice : http://114.71.251.214/BQSR/rice/rice_pseudoDB.vcf.gz
-*	chickpea : http://114.71.251.214/BQSR/chickpea/chickpea_pseudoDB.vcf.gz
+*	human : https://114.71.251.214/BQSR/human/human_pseudoDB.vcf.gz
+*	sheep : https://114.71.251.214/BQSR/sheep/sheep_pseudoDB.vcf.gz
+*	rice : https://114.71.251.214/BQSR/rice/rice_pseudoDB.vcf.gz
+*	chickpea : https://114.71.251.214/BQSR/chickpea/chickpea_pseudoDB.vcf.gz
 
 <br><br>
 ## Ⅱ. Download “gatk.py” module in the repository
