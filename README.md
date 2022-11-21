@@ -105,7 +105,7 @@ gatk.align_fastq(“species_name”, “reference_file”, “sample_name”)
 (eg) gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,"HG00096")
 
 (note) .bam and .bai files are created in directory “align”
-<br><br>
+<br><br><br>
 ### 5.	recalibrate machine-provided base quality score. 
 ```
 gatk.recal_qs(“species_name”, “reference_file” , “name of database”, “db_type”, “sample_name”)
@@ -116,7 +116,7 @@ gatk.recal_qs(“species_name”, “reference_file” , “name of database”,
 
 (eg2) gatk.recal_qs(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa” , “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)
 
-
+<br><br>
 ### 6.	create a pseudo database
 ```
 gatk.pseudo_db(“species_name”, “reference_file”)
