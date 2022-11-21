@@ -76,11 +76,10 @@ list of subdirectories created under directory “species_name”
 +	qs: result of estimating model-adjusted base quality score
 
 
-
 (eg) bqsr.set_wd(“human”) for human genome
 (note) move downloaded FASTQ, references, dbSNPs files into the above directories of fastq, refer, and db, respectively 
 
-<br><br>
+<br>
 ### 3. created files for alignment into subdirectory “refer”.
 ```
 gatk.pre_align(“species_name”, “reference_file”)
@@ -105,7 +104,8 @@ gatk.align_fastq(“species_name”, “reference_file”, “sample_name”)
 (eg) gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,"HG00096")
 
 (note) .bam and .bai files are created in directory “align”
-<br><br><br>
+<br>
+
 ### 5.	recalibrate machine-provided base quality score. 
 ```
 gatk.recal_qs(“species_name”, “reference_file” , “name of database”, “db_type”, “sample_name”)
@@ -116,7 +116,8 @@ gatk.recal_qs(“species_name”, “reference_file” , “name of database”,
 
 (eg2) gatk.recal_qs(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa” , “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)
 
-<br><br>
+<br>
+
 ### 6.	create a pseudo database
 ```
 gatk.pseudo_db(“species_name”, “reference_file”)
@@ -125,7 +126,8 @@ gatk.pseudo_db(“species_name”, “reference_file”)
 
 (note) .vcf file is created in directory “db”. 
 (eg) human_pseudoDB.vcf 
-<br><br>
+<br>
+
 ### 7.	call genetic variants 
 ```
 gatk.variant_call(“species_name”, “reference_file”, “db_type”)
@@ -141,6 +143,7 @@ gatk.variant_call(“species_name”, “reference_file”, “db_type”)
 (eg1) human_dbSNP_variant_calling.vcf (using “dbSNP”)
 
 (eg2) human_pseudoDB_variant_calling.vcf (using “pseudoDB”)
+<br>
 
 ### 8.	estimate sample error rate
 ```
@@ -149,7 +152,8 @@ gatk.error_rate(“species_name”, “sample_name”, “reference_file”, “
 (eg) gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”, “dbSNP”)
 
 (note) file “HG00096_dbSNP_erate” is created in directory “erate”
-<br><br>
+<br>
+
 ### 9.	estimate model-adjusted base quality score
 ```
 gatk.model_qs(“species_name”, “sample_name”, “db_type”)
