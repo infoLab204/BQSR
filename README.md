@@ -123,7 +123,8 @@ gatk.pseudo_db(“species_name”, “reference_file”)
 ```
 (eg) gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)
 
-(note) .vcf file is created in directory “db”. (eg) human_pseudoDB.vcf 
+(note) .vcf file is created in directory “db”. 
+(eg) human_pseudoDB.vcf 
 <br><br>
 ### 7.	call genetic variants 
 ```
