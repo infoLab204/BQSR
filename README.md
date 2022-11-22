@@ -43,14 +43,14 @@ install following tools and download FASTQ, references, dbSNPs, and Pseudo-datab
 
 Functions in “gatk.py” module:
 
-+ setwd( ): set working directory
-+	pre_align( ): create files from reference sequence for alignment
-+	align_fastq( ): align FASTQ to reference sequence 
-+	recal_qs( ): recalibrate base quality score
-+	pseudo_db( ): construct pseudo-database 
-+	variant_call( ): genetic variant calling
-+	error_rate( ): estimate error rate of sample
-+	model_qs( ): estimate model-adjusted base quality score
++ __setwd( )__: set working directory
++	__pre_align( )__: create files from reference sequence for alignment
++	__align_fastq( )__: align FASTQ to reference sequence 
++	__recal_qs( )__: recalibrate base quality score
++	__pseudo_db( )__: construct pseudo-database 
++	__variant_call( )__: genetic variant calling
++	__error_rate( )__: estimate error rate of sample
++	__model_qs( )__: estimate model-adjusted base quality score
 
 <br><br>
 ## Ⅲ. Python scripts tutorial
@@ -66,14 +66,14 @@ gatk.set_wd(“species_name”)
 
 list of subdirectories created under directory “species_name”
 
-+	fastq: set of sample FASTQ files
-+ refer: reference sequence 
-+	db: database of known variants, such as dbSNP or pseudo-database
-+	align: results of aligning FASTQ to reference
-+	recal: result of recalibrating machine-provided base quality score 
-+	variants: result of genetic variant calling
-+	erate: result of estimating sample error rate
-+	qs: result of estimating model-adjusted base quality score
++	__fastq__: set of sample FASTQ files
++ __refer__: reference sequence 
++	__db__: database of known variants, such as dbSNP or pseudo-database
++	__align__: results of aligning FASTQ to reference
++	__recal__: result of recalibrating machine-provided base quality score 
++	__variants__: result of genetic variant calling
++	__erate__: result of estimating sample error rate
++	__qs__: result of estimating model-adjusted base quality score
 
 
 (eg) bqsr.set_wd(“human”) for human genome
