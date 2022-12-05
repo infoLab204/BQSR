@@ -35,7 +35,6 @@ def set_wd(species) :
     # result of genetic variant calling
     os.mkdir(f"{species}/variants")
 
-
 # end of set_wd()
 
 
@@ -55,7 +54,7 @@ def pre_align(species, reference_file) :
     # generate the sequence dictionary 
     os.system(f"java -jar {PICARD}/CreateSequenceDictionary.jar REFERENCE={species}/refer/{reference_file} OUTPUT={species}/refer/{reference_file[:reference_file.find('fa')]}dict")
 
-# end of reference()
+# end of pre_align()
 
 
 
@@ -107,8 +106,6 @@ def align_fastq(*realign) :
 # end of align_fastq()
 
 
-
-
 # Base quality score recalibration 
 def recal_qs(*recal) : 
     species=recal[0]     # species
@@ -144,8 +141,6 @@ def recal_qs(*recal) :
 # end of recal_qs()
 
 
-
-
 # variant discovery 
 def variant_call(species, reference_file, dbtype):
     path_dir=f"{species}/recal"
@@ -169,8 +164,6 @@ def variant_call(species, reference_file, dbtype):
 # end of variant_call()
 
 
-
-
 # create pseudo database
 def pseudo_db(species, reference_file):
     path_dir=f"{species}/align"
@@ -192,8 +185,6 @@ def pseudo_db(species, reference_file):
     os.system(f"java -jar {GATK}  -T UnifiedGenotyper -R {species}/refer/{reference_file} {sample_list }" );
 
 # end of pseudo_db()
-
-
 
 
 def error_rate(species, sample, reference_file, database, dbtype) :
@@ -333,8 +324,6 @@ def error_rate(species, sample, reference_file, database, dbtype) :
     error_rate.close()
 
 # end of error_rate()
-
-
 
 
 def model_qs(species, sample, db_type) :
