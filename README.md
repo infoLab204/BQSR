@@ -1,4 +1,4 @@
-# BQSR README
+# pseudo_DB README
 The following Python scripts are to call the genetic variants from FASTQ. 
 
 (note) Python version 3.6 or higher is required.<br><br>
