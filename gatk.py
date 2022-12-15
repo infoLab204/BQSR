@@ -1,10 +1,10 @@
 import os
 
 # program setting
-BWA="/work/bwa/"
-PICARD="/work/picard/picard.jar"
-GATK="/work/gatk/GenomeAnalysisTK.jar"
-SAMTOOLS="/work/samtools/"
+BWA="/tools/bwa/"
+PICARD="/tools/picard/picard.jar"
+GATK="/tools/gatk/GenomeAnalysisTK.jar"
+SAMTOOLS="/tools/samtools/"
 
 
 # working directory 
