@@ -30,7 +30,7 @@ _$make install_
     (note) The up-to-date versions of bwa and bwa2 are bwa-0.7.17 (Nov 7, 2017, https://sourceforge.net/projects/bio-bwa/files/) and bwa-mem2-2.2.1 (Mar 17, 2021, https://github.com/bwa-mem2/bwa-mem2/releases/), respectively. 
 
 4.	Download and install Samtools using the following commands.   
-_$wget https://github.com/samtools/samtools/releases/download/1.16.1/samtools-1.16.X.tar.bz2_   
+_$wget https://github.com/samtools/samtools/releases/download/1.16.1/samtools-1.16.1.tar.bz2_   
 _$bunzip2 samtools-1.16.1.tar.bz2_		# unzip and untar file   
 _$tar xvf samtools-1.16.1.tar_   
 _$mv samtools-1.16.1 	 samtools_		# change directory name   
@@ -72,55 +72,59 @@ https://www.internationalgenome.org/data-portal/sample
     *	rice: https://www.ebi.ac.uk/ena/browser/view/PRJEB6180?show=reads
     *	chickpea: https://db.cngb.org/search/project/CNP0000370/
 
-4.	Download a sample (eg: HG00096) of human FASTQ.   
-    (note) You can download as many samples as you want for the variant calling. In this tutorial, we just use one sample.  
+	1.	Download a sample (eg: HG00096) of human FASTQ.   
+    	(note) You can download as many samples as you want for the variant calling. In this tutorial, we just use one sample.  
      
-    a.	Go to https://www.internationalgenome.org/data-portal/sample  
-    b.	Search for sample “HG00096” (see Fig.2).   
+    	a.	Go to https://www.internationalgenome.org/data-portal/sample  
+    	b.	Search for sample “HG00096” (see Fig.2).   
     
-    ![image](https://user-images.githubusercontent.com/63629577/209597435-7c156350-bb4a-4d1d-9b73-220ea83d35ff.png)   
-    *Fig. 2: https://www.internationalgenome.org/data-portal/sample.*
+    	![image](https://user-images.githubusercontent.com/63629577/209597435-7c156350-bb4a-4d1d-9b73-220ea83d35ff.png)   
+    	*Fig. 2: https://www.internationalgenome.org/data-portal/sample.*
 
-    c.	Click “HG00096” under ‘1 matching sample’.    
+    	c.	Click “HG00096” under ‘1 matching sample’.    
 
-    d.	Check “sequence” for Data types and “Low coverage WGS” for Technologies. You can find 6 FASTQ files in the case of HG00096 as shown below (Fig. 3). 
+    	d.	Check “sequence” for Data types and “Low coverage WGS” for Technologies. You can find 6 FASTQ files in the case of HG00096 as shown below (Fig. 3). 
     
-    ![image](https://user-images.githubusercontent.com/63629577/209597483-24b1a42b-becb-40e6-af57-b8bf25a463e8.png)   
-    *Fig. 3: Result of searching HG00096.*
+    	![image](https://user-images.githubusercontent.com/63629577/209597483-24b1a42b-becb-40e6-af57-b8bf25a463e8.png)   
+    	*Fig. 3: Result of searching HG00096.*
 
-    e.	Go to the directory “fastq” and download the matching data (FASTQ) files.   
+    	e.	Go to the directory “fastq” and download the matching data (FASTQ) files.   
     
-       _$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_1.fastq.gz_    
-       _$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_2.fastq.gz_    
-       _$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_1.fastq.gz_   
-       _$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_2.fastq.gz_   
-       _$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_1.fastq.gz_   
-       _$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_2.fastq.gz_   
+       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_1.fastq.gz_    
+       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_2.fastq.gz_    
+       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_1.fastq.gz_   
+       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_2.fastq.gz_   
+       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_1.fastq.gz_   
+       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_2.fastq.gz_   
           
-    f.	Combine the FASTQ files and rename the combined file: 
+    	f.	Combine the FASTQ files and rename the combined file: 
     
-      _$zcat SRR062634_1.fastq.gz	SRR062635_1.fastq.gz SRR062641_1.fastq.gz | gzip -c > HG00096_1.fastq.gz_    
-      _$zcat SRR062634_2.fastq.gz SRR062635_2.fastq.gz SRR062641_2.fastq.gz | gzip -c > HG00096_2.fastq.gz_
+      	_$zcat SRR062634_1.fastq.gz SRR062635_1.fastq.gz SRR062641_1.fastq.gz | gzip -c > HG00096_1.fastq.gz_    
+      	_$zcat SRR062634_2.fastq.gz SRR062635_2.fastq.gz SRR062641_2.fastq.gz | gzip -c > HG00096_2.fastq.gz_
 
-5.	Go to the directory “ref” and download the reference sequence of human from    
-  _$wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa_    	# download human reference sequence
-  (note) you can download reference sequence of other species(sheep, rice, and chickpea) at 
-  * sheep: https://www.ncbi.nlm.nih.gov/assembly/GCF_002742125.1/
-  * rice : https://rapdb.dna.affrc.go.jp/download/irgsp1.html
-  * chickpea : http://ftp.ncbi.nlm.nih.gov/genomes/genbank/plant/Cicer_arietinum/all_assembly_versions/GCA_000331145.1_ASM33114v1
+4.	Go to the directory “ref” and download the reference sequence of human from    
+  _$wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa_    	# download human reference sequence   
+  
+  	(note) you can download reference sequence of other species (sheep, rice, and chickpea)      
+  	* sheep: https://www.ncbi.nlm.nih.gov/assembly/GCF_002742125.1/
+  	* rice : https://rapdb.dna.affrc.go.jp/download/irgsp1.html
+  	* chickpea : http://ftp.ncbi.nlm.nih.gov/genomes/genbank/plant/Cicer_arietinum/all_assembly_versions/GCA_000331145.1_ASM33114v1
 	
-6.	Go to directory “db” and download two variant databases: dbSNP and pseudo-DB.  
+5.	Go to directory “db” and download two variant databases: dbSNP and pseudo-DB.  
     a.	Download dbSNP of human and rename it.   
       _$wget https://ftp.ncbi.nih.gov/snp/organisms/human_9606/VCF/00-All.vcf.gz_  # download   
 		  _$mv 00-All.vcf.gz      dbSNP_b151.vcf.gz_        # change DB name    
+		  
     (note) The up-to-date version of dbSNP in human is build155 (Jun 16, 2021,  https://www.ncbi.nlm.nih.gov/SNP/snp_summary.cgi?view+summary=view+summary&build_id=155).   
-    (note) you can download dbSNP of other species(sheep, rice, and chickpea) at 
+    
+    (note) you can download dbSNP of other species(sheep, rice, and chickpea) at    
     * sheep : https://ftp.ncbi.nih.gov/snp/organisms/archive/sheep_9940/VCF/00-All.vcf.gz
     * rice : https://ftp.ncbi.nih.gov/snp/organisms/archive/rice_4530/VCF/00-All.vcf.gz
     * chickpea : https://ftp.ncbi.nih.gov/snp/organisms/archive/chickpea_3827/VCF/
 
     b.	Download pseudo-database at
       https://114.71.251.214/BQSR/human/human_pseudoDB.vcf.gz   
+      
     (note) you can download pseudo-db of other species (sheep, rice, and chickpea) at  
     
     *	sheep: https://114.71.251.214/BQSR/sheep/sheep_pseudoDB.vcf.gz 
