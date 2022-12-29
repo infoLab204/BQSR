@@ -4,56 +4,58 @@ This tutorial guides you on how to call genetic variants and related analysis st
 ![](https://user-images.githubusercontent.com/63629577/209596455-a7696db8-98a9-483e-a39c-ebd71579813e.png)   
                     *Fig. 1 : The overall structure of the directories.*
 
+<br>
 Let’s get started!!
+<br><br><br>
 
 ## (*) Part I: Install tools
 1.	Create a directory  
 Create the directory “tools” in your home directory.   
-_$mkdir tools_  
+___$mkdir tools___  
 
 2.	Go to the directory “tools”, and download and install the following tools.
 
-    *	BWA: https://sourceforge.net/projects/bio-bwa/files/
-    *	Samtools: https://github.com/samtools/samtools/releases/
-    *	Picard: https://github.com/broadinstitute/pocard/releases/
-    *	GATK: https://github.com/broadinstitute/gatk/releases/
+    *	__BWA__: https://sourceforge.net/projects/bio-bwa/files/
+    *	__Samtools__: https://github.com/samtools/samtools/releases/
+    *	__Picard__: https://github.com/broadinstitute/pocard/releases/
+    *	__GATK__: https://github.com/broadinstitute/gatk/releases/
 
 3.	Download and install BWA(Burrows-Wheeler Aligner) using the following commands.  
-_$wget https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.12.tar.bz2_       # download  
-_$bunzip2 bwa-0.7.12.tar.bz2_  	        # unzip and untar file  
-_$tar xvf bwa-0.7.12.tar_  
-_$mv bwa-0.7.12  bwa_			        # change directory name  
-_$cd bwa_ 				                # go to directory bwa and install BWA  
-_$make_  
-_$make install_  
+___$wget https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.12.tar.bz2___       # download  
+___$bunzip2 bwa-0.7.12.tar.bz2___  	        # unzip and untar file  
+___$tar xvf bwa-0.7.12.tar___  
+___$mv bwa-0.7.12  bwa___			        # change directory name  
+___$cd bwa___ 				                # go to directory bwa and install BWA  
+___$make___  
+___$make install___  
 
     (note) The up-to-date versions of bwa and bwa2 are bwa-0.7.17 (Nov 7, 2017, https://sourceforge.net/projects/bio-bwa/files/) and bwa-mem2-2.2.1 (Mar 17, 2021, https://github.com/bwa-mem2/bwa-mem2/releases/), respectively. 
 
 4.	Download and install Samtools using the following commands.   
-_$wget https://github.com/samtools/samtools/releases/download/1.16.1/samtools-1.16.1.tar.bz2_   
-_$bunzip2 samtools-1.16.1.tar.bz2_		# unzip and untar file   
-_$tar xvf samtools-1.16.1.tar_   
-_$mv samtools-1.16.1 	 samtools_		# change directory name   
-_$cd samtools_  				# go to samtools and install samtools   
-_$make_		  	  			 
-_$make install_   
+___$wget https://github.com/samtools/samtools/releases/download/1.16.1/samtools-1.16.1.tar.bz2___   
+___$bunzip2 samtools-1.16.1.tar.bz2___		# unzip and untar file   
+___$tar xvf samtools-1.16.1.tar___   
+___$mv samtools-1.16.1 	 samtools___		# change directory name   
+___$cd samtools___  				# go to samtools and install samtools   
+___$make___    
+___$make install___   
 
 5.	Download picard using the following commands.   
-_$mkdir picard_			# create a directory under directory tools   
-_$cd picard_  			# go to directory picard   
-_$wget https://github.com/broadinstitute/picard/releases/download/2.26.0/picard.jar_   
+___$mkdir picard___			# create a directory under directory tools   
+___$cd picard___  			# go to directory picard   
+___$wget https://github.com/broadinstitute/picard/releases/download/2.26.0/picard.jar___   
   
     (note) Make sure JDK version 1.8 or higher has been installed.   
 
 
 6.	Download and install GATK using the following command.  
-_$wget https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2_      	 # download GATK   
-_$bunzip2 GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2_      # unzip and untar file   
-_$tar xvf GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar_   
-_$mv GenomeAnalysisTK-3.8-1-0-gf15c1c3ef  gatk_         # change directory name   
+___$wget https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2___      	 # download GATK   
+___$bunzip2 GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2___      # unzip and untar file   
+___$tar xvf GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar___   
+___$mv GenomeAnalysisTK-3.8-1-0-gf15c1c3ef  gatk___         # change directory name   
 
 (note) The up-to-date version of GATK is gatk-4.3.0.0 (Oct 12, 2022, https://github.com/broadinstitute/gatk/releases/). 
- 
+<br><br><br> 
 ## (*) Part II: Data download
 1. Create directories  
     a. Assuming that you are working with human data, make a directory “human” under your home directory.  
@@ -67,12 +69,13 @@ _$mv GenomeAnalysisTK-3.8-1-0-gf15c1c3ef  gatk_         # change directory name
 
 3.	Go to the directory “fastq” and download FASTQ file of human from 
 https://www.internationalgenome.org/data-portal/sample   
+
     (note) you can download FASTQ of other species (sheep, rice, and chickpea) at 
     *	sheep: https://db.cngb.org/search/project/CNP0000370/
     *	rice: https://www.ebi.ac.uk/ena/browser/view/PRJEB6180?show=reads
     *	chickpea: https://db.cngb.org/search/project/CNP0000370/
-
-	1.	Download a sample (eg: HG00096) of human FASTQ.   
+    
+    	(*) Download a sample (eg: HG00096) of human FASTQ.   
     	(note) You can download as many samples as you want for the variant calling. In this tutorial, we just use one sample.  
      
     	a.	Go to https://www.internationalgenome.org/data-portal/sample  
@@ -90,20 +93,20 @@ https://www.internationalgenome.org/data-portal/sample
 
     	e.	Go to the directory “fastq” and download the matching data (FASTQ) files.   
     
-       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_1.fastq.gz_    
-       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_2.fastq.gz_    
-       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_1.fastq.gz_   
-       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_2.fastq.gz_   
-       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_1.fastq.gz_   
-       	_$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_2.fastq.gz_   
+       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_1.fastq.gz___    
+       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_2.fastq.gz___    
+       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_1.fastq.gz___   
+       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_2.fastq.gz___   
+       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_1.fastq.gz___   
+       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_2.fastq.gz___   
           
     	f.	Combine the FASTQ files and rename the combined file: 
     
-      	_$zcat SRR062634_1.fastq.gz SRR062635_1.fastq.gz SRR062641_1.fastq.gz | gzip -c > HG00096_1.fastq.gz_    
-      	_$zcat SRR062634_2.fastq.gz SRR062635_2.fastq.gz SRR062641_2.fastq.gz | gzip -c > HG00096_2.fastq.gz_
+      	___$zcat SRR062634_1.fastq.gz SRR062635_1.fastq.gz SRR062641_1.fastq.gz | gzip -c > HG00096_1.fastq.gz___    
+      	___$zcat SRR062634_2.fastq.gz SRR062635_2.fastq.gz SRR062641_2.fastq.gz | gzip -c > HG00096_2.fastq.gz___
 
 4.	Go to the directory “ref” and download the reference sequence of human from    
-  _$wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa_    	# download human reference sequence   
+  ___$wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa___    	# download human reference sequence   
   
   	(note) you can download reference sequence of other species (sheep, rice, and chickpea)      
   	* sheep: https://www.ncbi.nlm.nih.gov/assembly/GCF_002742125.1/
@@ -112,7 +115,7 @@ https://www.internationalgenome.org/data-portal/sample
 	
 5.	Go to directory “db” and download two variant databases: dbSNP and pseudo-DB.  
     a.	Download dbSNP of human and rename it.   
-      _$wget https://ftp.ncbi.nih.gov/snp/organisms/human_9606/VCF/00-All.vcf.gz_  # download   
+      ___$wget https://ftp.ncbi.nih.gov/snp/organisms/human_9606/VCF/00-All.vcf.gz___  # download   
 		  _$mv 00-All.vcf.gz      dbSNP_b151.vcf.gz_        # change DB name    
 		  
     (note) The up-to-date version of dbSNP in human is build155 (Jun 16, 2021,  https://www.ncbi.nlm.nih.gov/SNP/snp_summary.cgi?view+summary=view+summary&build_id=155).   
@@ -130,18 +133,15 @@ https://www.internationalgenome.org/data-portal/sample
     *	sheep: https://114.71.251.214/BQSR/sheep/sheep_pseudoDB.vcf.gz 
     *	rice: https://114.71.251.214/BQSR/rice/rice_pseudoDB.vcf.gz 
     *	chickpea: https://114.71.251.214/BQSR/chickpea/chickpea_pseudoDB.vcf.gz 
- 
- 
- 
- 
+<br><br><br>
 ## (*) Part III: Variant calling with analysis
 1.	Download “gatk.py” module from the github repository into directory “tools”.   
-	_$curl -L -O https://github.com/infoLab204/pseudo_DB/raw/main/gatk.py_  # download “gatk.py” module   
+	___$curl -L -O https://github.com/infoLab204/pseudo_DB/raw/main/gatk.py___  # download “gatk.py” module   
 
 
 2.	Go to the directory “tools” and import the module as follows.   
 
-     _$import  gatk_        # import the “gatk.py” module   
+     ___$import  gatk___        # import the “gatk.py” module   
   
     (note) The “gatk.py” module contains the following functions:   
     *	set_wd( ): set working directory   
@@ -161,7 +161,7 @@ https://www.internationalgenome.org/data-portal/sample
       Format: gatk.set_wd(“species_name”)   
     ```
     
-     _$gatk.set_wd(“human”)_          # create subdirectories   
+     ___$gatk.set_wd(“human”)___          # create subdirectories   
 
     The list of subdirectories created under directory “module”:   
     *	align: results of aligning FASTQ to reference   
@@ -177,7 +177,7 @@ https://www.internationalgenome.org/data-portal/sample
     Format: gatk.pre_align(“species_name”, “reference_file”)   
     ```
   
-	 _$gatk.pre_align(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”)_   
+	 ___$gatk.pre_align(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
     
     The following files are created in the directory “ref”:
     *	GRCh38_full_analysis_set_plus_decoy_hla.fa.amb
@@ -194,7 +194,7 @@ https://www.internationalgenome.org/data-portal/sample
     Format: gatk.align_fastq(“species_name”, “reference_sequence”, “sample_name”)   
     ```
   
-	_$gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)_   
+	___$gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)___   
   
     Files HG00096_aligned.bam and HG00096_aligned.bai are created in the directory “align”.   
     
@@ -204,7 +204,7 @@ https://www.internationalgenome.org/data-portal/sample
     ```
     Format: gatk.pseudo_db(“species_name”, “reference”)   
     ```
-    _$gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)_   
+    ___$gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
   
       File “human_pseudoDB.vcf” and “human_pseudoDB.vcf.idx” are created in the directory “db”.    
     
@@ -218,11 +218,11 @@ https://www.internationalgenome.org/data-portal/sample
     
     (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   
   
-     _$gatk.qs_recal(“human”,“dbSNP_b151.vcf”,“dbSNP”,”HG00096”)_   
+     ___$gatk.qs_recal(“human”,“dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___   
   
      Files HG00096_dbSNP_recalibrated.bam and HG00096_dbSNP_recalibrated.bai are created in the directory “machine”.  <br><br> 
 
-     _$gatk.qs_recal(“human”,“human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)_   
+     ___$gatk.qs_recal(“human”,“human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___   
  
      Files HG00096_pseudoDB_recalibrated.bam and HG00096_pseudoDB_recalibrated.bai are created in the directory “machine”.   
     
@@ -234,11 +234,11 @@ https://www.internationalgenome.org/data-portal/sample
 	  Format: gatk.variant_call(“species_name”, “reference”, “db_type”)   
     ```
   
- 	   _$gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“dbSNP”)_  
+ 	   ___$gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“dbSNP”)___  
   
      Files “human_dbSNP_variant_calling.vcf” and “human_dbSNP_variant_calling.vcf.idx” are created in the directory “variants”.   <br><br>
   
-     _$gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“pseudoDB”)_   
+     ___$gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“pseudoDB”)___   
   
      FIles “human_pseudoDB_variant_calling.vcf” and “human_pseudoDB_variant_calling.vcf.idx” are created in the directory “variants”.   
     
@@ -249,11 +249,11 @@ https://www.internationalgenome.org/data-portal/sample
     ```
 	  Format: gatk.error_rate(“species_name”, “sample_name”, “reference”, “name of database”, “db_type”)   
     ```
-    _$gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”, “dbSNP”)_   
+    ___$gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”, “dbSNP”)___   
     
     File “HG00096_dbSNP_erate” is created in the directory “error”.   <br><br>
     
-    _$gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”, “pseudoDB”)_   
+    ___$gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”, “pseudoDB”)___   
     
     File “HG00096_pseudoDB_erate” is created in the directory “error”.
   
@@ -265,11 +265,11 @@ https://www.internationalgenome.org/data-portal/sample
     Format: gatk.qs_model(“species_name”, “sample_name”, “db_type”)   
     ```
   
-      _$gatk.qs_model(“human”,“HG00096”, “dbSNP”)_   
+      ___$gatk.qs_model(“human”,“HG00096”, “dbSNP”)___   
   
       File “HG00096_dbSNP_qs” is created in the directory “model”   <br><br>
   
-      _$gatk.qs_model(“human”,“HG00096”, “pseudoDB”)_  
+      ___$gatk.qs_model(“human”,“HG00096”, “pseudoDB”)___  
   
       File “HG00096_pseudoDB_qs” is created in directory “model”   
   
