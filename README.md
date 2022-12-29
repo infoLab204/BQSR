@@ -2,7 +2,7 @@
 This tutorial guides you on how to call genetic variants and related analysis step by step. It consists of three parts: installing tools, download data, and variant calling pipeline with analysis. It illustrates the whole procedure of the variant calling with the human data as an example. The variant calling of other species would be the same except the name of species. We assume that you are running the Unix/Linux operating system. Various directories are created in the course of the variant calling. The directory structure is shown in Fig. 1. To run this tutorial, we need to install two programming languages: Python and Java. Note that Python version 3.6 or higher and JDK version 1.8 (due to GATK) are required. While the tutorial uses the tools when most of the work has been done, you can use the most up-to-date version of the tools. In the tutorial, ‘$’ stands for the command prompt and # stands for comments that should be removed for execution. In addition, all executable commands are italicized. 
 
 ![](https://user-images.githubusercontent.com/63629577/209596455-a7696db8-98a9-483e-a39c-ebd71579813e.png)   
-                    *Fig. 1 : The overall structure of the directories.*
+*Fig. 1 : The overall structure of the directories.*
 
 <br>
 Let’s get started!!
