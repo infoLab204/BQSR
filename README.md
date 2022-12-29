@@ -102,14 +102,22 @@ https://www.internationalgenome.org/data-portal/sample
       _$zcat SRR062634_1.fastq.gz	SRR062635_1.fastq.gz SRR062641_1.fastq.gz | gzip -c > HG00096_1.fastq.gz_    
       _$zcat SRR062634_2.fastq.gz SRR062635_2.fastq.gz SRR062641_2.fastq.gz | gzip -c > HG00096_2.fastq.gz_
 
-5.	Go to the directory “ref” and download the reference sequence.   
+5.	Go to the directory “ref” and download the reference sequence of human from    
   _$wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa_    	# download human reference sequence
+  (note) you can download reference sequence of other species(sheep, rice, and chickpea) at 
+  * sheep: https://www.ncbi.nlm.nih.gov/assembly/GCF_002742125.1/
+  * rice : https://rapdb.dna.affrc.go.jp/download/irgsp1.html
+  * chickpea : http://ftp.ncbi.nlm.nih.gov/genomes/genbank/plant/Cicer_arietinum/all_assembly_versions/GCA_000331145.1_ASM33114v1
 	
 6.	Go to directory “db” and download two variant databases: dbSNP and pseudo-DB.  
-    a.	Download dbSNP and rename it.   
+    a.	Download dbSNP of human and rename it.   
       _$wget https://ftp.ncbi.nih.gov/snp/organisms/human_9606/VCF/00-All.vcf.gz_  # download   
 		  _$mv 00-All.vcf.gz      dbSNP_b151.vcf.gz_        # change DB name    
     (note) The up-to-date version of dbSNP in human is build155 (Jun 16, 2021,  https://www.ncbi.nlm.nih.gov/SNP/snp_summary.cgi?view+summary=view+summary&build_id=155).   
+    (note) you can download dbSNP of other species(sheep, rice, and chickpea) at 
+    * sheep : https://ftp.ncbi.nih.gov/snp/organisms/archive/sheep_9940/VCF/00-All.vcf.gz
+    * rice : https://ftp.ncbi.nih.gov/snp/organisms/archive/rice_4530/VCF/00-All.vcf.gz
+    * chickpea : https://ftp.ncbi.nih.gov/snp/organisms/archive/chickpea_3827/VCF/
 
     b.	Download pseudo-database at
       https://114.71.251.214/BQSR/human/human_pseudoDB.vcf.gz   
@@ -134,7 +142,7 @@ https://www.internationalgenome.org/data-portal/sample
     (note) The “gatk.py” module contains the following functions:   
     *	set_wd( ): set working directory   
     *	pre_align( ): create files from reference sequence for alignment   
-    * align_fastq( ): align FASTQ to reference sequence     
+    *   align_fastq( ): align FASTQ to reference sequence     
     *	pseudo_db( ): construct pseudo-database    
     *	qs_recal( ): recalibrate base quality score   
     *	variant_call( ): call genetic variants   
