@@ -21,11 +21,11 @@ ___$mkdir tools___
     *	__GATK__: https://github.com/broadinstitute/gatk/releases/
 
 3.	Download and install BWA(Burrows-Wheeler Aligner) using the following commands.  
-___$wget https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.12.tar.bz2___       # download  
-___$bunzip2 bwa-0.7.12.tar.bz2___  	        # unzip and untar file  
+___$wget https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.12.tar.bz2___       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download  
+___$bunzip2 bwa-0.7.12.tar.bz2___  	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# unzip and untar file  
 ___$tar xvf bwa-0.7.12.tar___  
-___$mv bwa-0.7.12  bwa___			        # change directory name  
-___$cd bwa___ 				                # go to directory bwa and install BWA  
+___$mv bwa-0.7.12  bwa___   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# change directory name  
+___$cd bwa___    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# go to directory bwa and install BWA  
 ___$make___  
 ___$make install___  
 
@@ -33,28 +33,28 @@ ___$make install___
 
 4.	Download and install Samtools using the following commands.   
 ___$wget https://github.com/samtools/samtools/releases/download/1.16.1/samtools-1.16.1.tar.bz2___   
-___$bunzip2 samtools-1.16.1.tar.bz2___		# unzip and untar file   
+___$bunzip2 samtools-1.16.1.tar.bz2___		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# unzip and untar file   
 ___$tar xvf samtools-1.16.1.tar___   
-___$mv samtools-1.16.1 	 samtools___		# change directory name   
-___$cd samtools___  				# go to samtools and install samtools   
+___$mv samtools-1.16.1 	 samtools___		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# change directory name   
+___$cd samtools___  				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# go to samtools and install samtools   
 ___$make___    
 ___$make install___   
 
 5.	Download picard using the following commands.   
-___$mkdir picard___			# create a directory under directory tools   
-___$cd picard___  			# go to directory picard   
+___$mkdir picard___			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# create a directory under directory tools   
+___$cd picard___  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# go to directory picard   
 ___$wget https://github.com/broadinstitute/picard/releases/download/2.26.0/picard.jar___   
   
-    (note) Make sure JDK version 1.8 or higher has been installed.   
+    (note) Make sure JDK version 1.8 has been installed.   
 
 
 6.	Download and install GATK using the following command.  
-___$wget https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2___      	 # download GATK   
-___$bunzip2 GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2___      # unzip and untar file   
+___$wget https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2___      	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download GATK   
+___$bunzip2 GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2___      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# unzip and untar file   
 ___$tar xvf GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar___   
-___$mv GenomeAnalysisTK-3.8-1-0-gf15c1c3ef  gatk___         # change directory name   
+___$mv GenomeAnalysisTK-3.8-1-0-gf15c1c3ef  gatk___         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# change directory name   
 
-(note) The up-to-date version of GATK is gatk-4.3.0.0 (Oct 12, 2022, https://github.com/broadinstitute/gatk/releases/). 
+	(note) The up-to-date version of GATK is gatk-4.3.0.0 (Oct 12, 2022, https://github.com/broadinstitute/gatk/releases/). 
 <br><br><br> 
 ## (*) Part II: Data download
 1. Create directories  
@@ -75,48 +75,47 @@ https://www.internationalgenome.org/data-portal/sample
     *	rice: https://www.ebi.ac.uk/ena/browser/view/PRJEB6180?show=reads
     *	chickpea: https://db.cngb.org/search/project/CNP0000370/
     
-    	(*) Download a sample (eg: HG00096) of human FASTQ.   
-    	(note) You can download as many samples as you want for the variant calling. In this tutorial, we just use one sample.  
+4. Download a sample (eg: HG00096) of human FASTQ.   
+    (note) You can download as many samples as you want for the variant calling. In this tutorial, we just use one sample.  
      
-    	a.	Go to https://www.internationalgenome.org/data-portal/sample  
-    	b.	Search for sample “HG00096” (see Fig.2).   
+    a.	Go to https://www.internationalgenome.org/data-portal/sample  
+    b.	Search for sample “HG00096” (see Fig.2).   
     
-    	![image](https://user-images.githubusercontent.com/63629577/209597435-7c156350-bb4a-4d1d-9b73-220ea83d35ff.png)   
-    	*Fig. 2: https://www.internationalgenome.org/data-portal/sample.*
+    ![image](https://user-images.githubusercontent.com/63629577/209597435-7c156350-bb4a-4d1d-9b73-220ea83d35ff.png)   
+    *Fig. 2: https://www.internationalgenome.org/data-portal/sample.*
 
-    	c.	Click “HG00096” under ‘1 matching sample’.    
+    c.	Click “HG00096” under ‘1 matching sample’.    
 
-    	d.	Check “sequence” for Data types and “Low coverage WGS” for Technologies. You can find 6 FASTQ files in the case of HG00096 as shown below (Fig. 3). 
+    d.	Check “sequence” for Data types and “Low coverage WGS” for Technologies. You can find 6 FASTQ files in the case of HG00096 as shown below (Fig. 3). 
     
-    	![image](https://user-images.githubusercontent.com/63629577/209597483-24b1a42b-becb-40e6-af57-b8bf25a463e8.png)   
-    	*Fig. 3: Result of searching HG00096.*
+    ![image](https://user-images.githubusercontent.com/63629577/209597483-24b1a42b-becb-40e6-af57-b8bf25a463e8.png)   
+    *Fig. 3: Result of searching HG00096.*
 
-    	e.	Go to the directory “fastq” and download the matching data (FASTQ) files.   
-    
-       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_1.fastq.gz___    
-       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_2.fastq.gz___    
-       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_1.fastq.gz___   
-       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_2.fastq.gz___   
-       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_1.fastq.gz___   
-       	___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_2.fastq.gz___   
+    e.	Go to the directory “fastq” and download the matching data (FASTQ) files.   
+    ___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_1.fastq.gz___    
+    ___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062634/SRR062634_2.fastq.gz___    
+    ___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_1.fastq.gz___   
+    ___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062635/SRR062635_2.fastq.gz___   
+    ___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_1.fastq.gz___   
+    ___$wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR062/SRR062641/SRR062641_2.fastq.gz___   
           
-    	f.	Combine the FASTQ files and rename the combined file: 
+    f.	Combine the FASTQ files and rename the combined file: 
     
-      	___$zcat SRR062634_1.fastq.gz SRR062635_1.fastq.gz SRR062641_1.fastq.gz | gzip -c > HG00096_1.fastq.gz___    
-      	___$zcat SRR062634_2.fastq.gz SRR062635_2.fastq.gz SRR062641_2.fastq.gz | gzip -c > HG00096_2.fastq.gz___
+      ___$zcat SRR062634_1.fastq.gz SRR062635_1.fastq.gz SRR062641_1.fastq.gz | gzip -c > HG00096_1.fastq.gz___    
+      ___$zcat SRR062634_2.fastq.gz SRR062635_2.fastq.gz SRR062641_2.fastq.gz | gzip -c > HG00096_2.fastq.gz___
 
-4.	Go to the directory “ref” and download the reference sequence of human from    
-  ___$wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa___    	# download human reference sequence   
+5.	Go to the directory “ref” and download the reference sequence of human from    
+  ___$wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa___    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download human reference sequence   
   
   	(note) you can download reference sequence of other species (sheep, rice, and chickpea)      
-  	* sheep: https://www.ncbi.nlm.nih.gov/assembly/GCF_002742125.1/
-  	* rice : https://rapdb.dna.affrc.go.jp/download/irgsp1.html
+  	* sheep: https://ftp.ncbi.nlm.nih.gov/genomes/genbank/vertebrate_mammalian/Ovis_aries/latest_assembly_versions/GCA_000298735.2_Oar_v4.0/
+  	* rice : https://ftp.ncbi.nlm.nih.gov/genomes/genbank/plant/Oryza_sativa/all_assembly_versions/GCA_001433935.1_IRGSP-1.0/
   	* chickpea : http://ftp.ncbi.nlm.nih.gov/genomes/genbank/plant/Cicer_arietinum/all_assembly_versions/GCA_000331145.1_ASM33114v1
 	
-5.	Go to directory “db” and download two variant databases: dbSNP and pseudo-DB.  
+6.	Go to directory “db” and download two variant databases: dbSNP and pseudo-DB.  <br>
     a.	Download dbSNP of human and rename it.   
-      ___$wget https://ftp.ncbi.nih.gov/snp/organisms/human_9606/VCF/00-All.vcf.gz___  # download   
-		  _$mv 00-All.vcf.gz      dbSNP_b151.vcf.gz_        # change DB name    
+      ___$wget https://ftp.ncbi.nih.gov/snp/organisms/human_9606/VCF/00-All.vcf.gz___  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download   
+      ___$mv 00-All.vcf.gz      dbSNP_b151.vcf.gz___        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# change DB name    
 		  
     (note) The up-to-date version of dbSNP in human is build155 (Jun 16, 2021,  https://www.ncbi.nlm.nih.gov/SNP/snp_summary.cgi?view+summary=view+summary&build_id=155).   
     
@@ -136,12 +135,12 @@ https://www.internationalgenome.org/data-portal/sample
 <br><br><br>
 ## (*) Part III: Variant calling with analysis
 1.	Download “gatk.py” module from the github repository into directory “tools”.   
-	___$curl -L -O https://github.com/infoLab204/pseudo_DB/raw/main/gatk.py___  # download “gatk.py” module   
+	___$curl -L -O https://github.com/infoLab204/pseudo_DB/raw/main/gatk.py___  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download “gatk.py” module   
 
 
 2.	Go to the directory “tools” and import the module as follows.   
 
-     ___$import  gatk___        # import the “gatk.py” module   
+     ___$import  gatk___        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# import the “gatk.py” module   
   
     (note) The “gatk.py” module contains the following functions:   
     *	set_wd( ): set working directory   
@@ -161,7 +160,7 @@ https://www.internationalgenome.org/data-portal/sample
       Format: gatk.set_wd(“species_name”)   
     ```
     
-     ___$gatk.set_wd(“human”)___          # create subdirectories   
+     ___$gatk.set_wd(“human”)___          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# create subdirectories   
 
     The list of subdirectories created under directory “module”:   
     *	align: results of aligning FASTQ to reference   
