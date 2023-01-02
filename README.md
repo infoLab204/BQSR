@@ -143,14 +143,14 @@ https://www.internationalgenome.org/data-portal/sample
      ___$import  gatk___        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# import the “gatk.py” module   
   
     (note) The “gatk.py” module contains the following functions:   
-    *	set_wd( ): set working directory   
-    *	pre_align( ): create files from reference sequence for alignment   
-    *   align_fastq( ): align FASTQ to reference sequence     
-    *	pseudo_db( ): construct pseudo-database    
-    *	qs_recal( ): recalibrate base quality score   
-    *	variant_call( ): call genetic variants   
-    *	error_tate() : estimate error rate of sample   
-    *	qs_model( ): estimate model-adjusted base quality score   
+    *	___set_wd( )___: set working directory   
+    *	___pre_align( )___: create files from reference sequence for alignment   
+    *   ___align_fastq( )___: align FASTQ to reference sequence     
+    *	___pseudo_db( )___: construct pseudo-database    
+    *	___qs_recal( )___: recalibrate base quality score   
+    *	___variant_call( )___: call genetic variants   
+    *	___error_tate()____ : estimate error rate of sample   
+    *	___qs_model( )___: estimate model-adjusted base quality score   
 
     (note) execute the above functions at directory “tools”.
 
@@ -163,11 +163,11 @@ https://www.internationalgenome.org/data-portal/sample
      ___$gatk.set_wd(“human”)___          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# create subdirectories   
 
     The list of subdirectories created under directory “module”:   
-    *	align: results of aligning FASTQ to reference   
-    *	error: result of estimating sample error rate   
-    *	machine: result of recalibrating machine-provided base quality score    
-    *	model: result of estimating model-adjusted base quality score   
-    *	variants: result of genetic variant calling   
+    *	___align___ : results of aligning FASTQ to reference   
+    *	___error___ : result of estimating sample error rate   
+    *	___machine___ : result of recalibrating machine-provided base quality score    
+    *	___model___ : result of estimating model-adjusted base quality score   
+    *	___variants___ : result of genetic variant calling   
     
 
 4.	Create file names for the alignment under directory “ref”.    
