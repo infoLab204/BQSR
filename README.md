@@ -125,13 +125,13 @@ https://www.internationalgenome.org/data-portal/sample
     * chickpea : https://ftp.ncbi.nih.gov/snp/organisms/archive/chickpea_3827/VCF/
 
     b.	Download pseudo-database at
-      https://114.71.251.214/BQSR/human/human_pseudoDB.vcf.gz   
+      https://zenodo.org/record/7488070/files/human_pseudoDB.vcf.gz?download=1   
       
     (note) you can download pseudo-db of other species (sheep, rice, and chickpea) at  
     
-    *	sheep: https://114.71.251.214/BQSR/sheep/sheep_pseudoDB.vcf.gz 
-    *	rice: https://114.71.251.214/BQSR/rice/rice_pseudoDB.vcf.gz 
-    *	chickpea: https://114.71.251.214/BQSR/chickpea/chickpea_pseudoDB.vcf.gz 
+    *	sheep: https://zenodo.org/record/7488425/files/sheep_pseudoDB.vcf.gz?download=1
+    *	rice: https://zenodo.org/record/7488383/files/rice_pseudoDB.vcf.gz?download=1
+    *	chickpea: https://zenodo.org/record/7487929/files/chickpea_pseudoDB.vcf.gz?download=1
 <br><br><br>
 ## (*) Part III: Variant calling with analysis
 1.	Download “gatk.py” module from the github repository into directory “tools”.   
