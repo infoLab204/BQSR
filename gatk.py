@@ -32,16 +32,16 @@ def set_wd(species) :
 def pre_align(species, reference_file) :
 
     # if .dict file exists, delete it
-    os.system(f"rm -rf {species}/ref/*.dict")
+    os.system(f"rm -rf {species}/data/ref/*.dict")
 
     # preparing the reference sequence
-    os.system(f"{BWA}/bwa index {species}/ref/{reference_file}")      
+    os.system(f"{BWA}/bwa index {species}/data/ref/{reference_file}")      
 
     # generate the fasta file index by running the following SAMtools command
-    os.system(f"{SAMTOOLS}/samtools faidx {species}/ref/{reference_file}")
+    os.system(f"{SAMTOOLS}/samtools faidx {species}/data/ref/{reference_file}")
 
     # generate the sequence dictionary 
-    os.system(f"java -jar {PICARD}/CreateSequenceDictionary REFERENCE={species}/ref/{reference_file} OUTPUT={species}/ref/{reference_file[:reference_file.find('fa')]}dict")
+    os.system(f"java -jar {PICARD}/CreateSequenceDictionary REFERENCE={species}/data/ref/{reference_file} OUTPUT={species}/data/ref/{reference_file[:reference_file.find('fa')]}dict")
 
 # end of pre_align()
 
@@ -70,27 +70,27 @@ def align_fastq(*realign) :
     # run by sample    
     for sample in sample_list :
        # mapping to reference
-       os.system(f"{BWA}/bwa mem -M -t 16 -R '@RG\\tID:{sample}\\tLB:{sample}\\tSM:{sample}\\tPL:ILLUMINA'  {species}/ref/{reference_file} {species}/fastq/{sample}_1.fastq.gz {species}/fastq/{sample}_2.fastq.gz > {species}/align/{sample}_init.sam") 
+       os.system(f"{BWA}/bwa mem -M -t 16 -R '@RG\\tID:{sample}\\tLB:{sample}\\tSM:{sample}\\tPL:ILLUMINA'  {species}/data/ref/{reference_file} {species}/data/fastq/{sample}_1.fastq.gz {species}/data/fastq/{sample}_2.fastq.gz > {species}/module/align/{sample}_init.sam") 
 
  
        # Mark Duplicate and Sort
-       os.system(f"java -jar {PICARD}/SortSam I={species}/align/{sample}_init.sam TMP_DIR=temp  O={species}/align/{sample}_sorted.sam SORT_ORDER=coordinate")
-       os.system(f"rm -rf {species}/align/{sample}_init.sam")
+       os.system(f"java -jar {PICARD}/SortSam I={species}/module/align/{sample}_init.sam TMP_DIR=temp  O={species}/module/align/{sample}_sorted.sam SORT_ORDER=coordinate")
+       os.system(f"rm -rf {species}/module/align/{sample}_init.sam")
 
-       os.system(f"java -jar {PICARD}/MarkDuplicates I={species}/align/{sample}_sorted.sam O={species}/align/{sample}_dup.bam  M={species}/align/{sample}_metrics.txt &> {species}/align/{sample}_dup_bam.log" );
-       os.system(f"rm -rf {species}/align/{sample}_sorted.sam");
+       os.system(f"java -jar {PICARD}/MarkDuplicates I={species}/module/align/{sample}_sorted.sam O={species}/module/align/{sample}_dup.bam  M={species}/module/align/{sample}_metrics.txt &> {species}/module/align/{sample}_dup_bam.log" )
+       os.system(f"rm -rf {species}/module/align/{sample}_sorted.sam")
 
        # make index file
-       os.system(f"java -jar {PICARD}/BuildBamIndex I={species}/align/{sample}_dup.bam");
+       os.system(f"java -jar {PICARD}/BuildBamIndex I={species}/module/align/{sample}_dup.bam")
 
        # Indel Realignment : realigner target Creator 
-       os.system(f"java -jar {GATK} -T RealignerTargetCreator -R {species}/refer/{reference_file}  -I {species}/align/{sample}_dup.bam -o {species}/align/{sample}_intervals.list &> {species}/align/{sample}_intervals_list.log");
+       os.system(f"java -jar {GATK} -T RealignerTargetCreator -R {species}/data/ref/{reference_file}  -I {species}/module/align/{sample}_dup.bam -o {species}/module/align/{sample}_intervals.list &> {species}/module/align/{sample}_intervals_list.log")
 	  
        # Indel Realignment : IndelRealigner 
-       os.system(f"java -jar {GATK} -T IndelRealigner -R {species}/ref/{reference_file} -I {species}/align/{sample}_dup.bam -targetIntervals {species}/align/{sample}_intervals.list  -o  {species}/align/{sample}_aligned.bam &> {species}/align/{sample}_aligned.log")
-       os.system(f"rm -rf {species}/align/{sample}_dup.bam {species}/align/{sample}_dup.bai {species}/align/{sample}_dup.idx {species}/align/{sample}_dup_bam.log")
-       os.system(f"rm -rf {species}/align/{sample}_intervals.list {species}/align/{sample}_aligned.log");
-       os.system(f"rm -rf {species}/align/{sample}_intervals_list.log {species}/align/{sample}_metrics.txt");
+       os.system(f"java -jar {GATK} -T IndelRealigner -R {species}/data/ref/{reference_file} -I {species}/module/align/{sample}_dup.bam -targetIntervals {species}/modlue/align/{sample}_intervals.list  -o  {species}/module/align/{sample}_aligned.bam &> {species}/module/align/{sample}_aligned.log")
+       os.system(f"rm -rf {species}/module/align/{sample}_dup.bam {species}/module/align/{sample}_dup.bai {species}/module/align/{sample}_dup.idx {species}/module/align/{sample}_dup_bam.log")
+       os.system(f"rm -rf {species}/module/align/{sample}_intervals.list {species}/module/align/{sample}_aligned.log");
+       os.system(f"rm -rf {species}/module/align/{sample}_intervals_list.log {species}/module/align/{sample}_metrics.txt");
 
 # end of align_fastq()
 
@@ -105,7 +105,7 @@ def qs_recal(*recal) :
     sample_list=[]    # sample list
     if len(recal)==4 :    # multiple samples  
         # mutiple sample 
-        path_dir=f"{species}/align"
+        path_dir=f"{species}/module/align"
     
         file_list=os.listdir(path_dir)
 
@@ -119,20 +119,20 @@ def qs_recal(*recal) :
     # run by sample
     for sample in sample_list : 
         # BaseRecalibrator 
-        os.system(f"java -jar {GATK} -T BaseRecalibrator -R {species}/ref/{reference_file} -I {species}/align/{sample}_aligned.bam  -knownSites {species}/db/{database} -o {species}/machine/{sample}_{dbtype}_recalibration_table &> {species}/machine/{sample}_{dbtype}_recalibration_table.log");
+        os.system(f"java -jar {GATK} -T BaseRecalibrator -R {species}/data/ref/{reference_file} -I {species}/module/align/{sample}_aligned.bam  -knownSites {species}/data/db/{database} -o {species}/module/machine/{sample}_{dbtype}_recalibration_table &> {species}/module/machine/{sample}_{dbtype}_recalibration_table.log")
 
         # PrintReads
-        os.system(f"java -jar {GATK} -T PrintReads -R {species}/ref/{reference_file} -I {species}/align/{sample}_aligned.bam  -BQSR {species}/machine/{sample}_{dbtype}_recalibration_table -o {species}/machine/{sample}_{dbtype}_recalibrated.bam &> {species}/machine/{sample}_{dbtype}_recalibrated_bam.log");
+        os.system(f"java -jar {GATK} -T PrintReads -R {species}/data/ref/{reference_file} -I {species}/module/align/{sample}_aligned.bam  -BQSR {species}/module/machine/{sample}_{dbtype}_recalibration_table -o {species}/module/machine/{sample}_{dbtype}_recalibrated.bam &> {species}/module/machine/{sample}_{dbtype}_recalibrated_bam.log")
         
         # delete file
-        os.system(f"rm -rf {species}/recal/{sample}_{dbtype}_recalibration_table  {species}/recal/{sample}_{dbtype}_recalibration_table.log {species}/recal/{sample}_{dbtype}_recalibrated_bam.log");
+        os.system(f"rm -rf {species}/module/machine/{sample}_{dbtype}_recalibration_table  {species}/module/machine/{sample}_{dbtype}_recalibration_table.log {species}/module/machine/{sample}_{dbtype}_recalibrated_bam.log")
 
 # end of qs_recal()
 
 
 # variant discovery 
 def variant_call(species, reference_file, dbtype):
-    path_dir=f"{species}/recal"
+    path_dir=f"{species}/module/machine"
     
     file_list=os.listdir(path_dir)
 
@@ -145,17 +145,17 @@ def variant_call(species, reference_file, dbtype):
    
     # UnifiedGenotyper caller  
     for i in range(len(sample)) :  
-        sample_list=sample_list + f"-I {species}/machine/{sample[i]} "
-    sample_list=sample_list + f"-o {species}/variants/{species}_{dbtype}_variant_calling.vcf --genotype_likelihoods_model BOTH &> {species}/variants/{species}_{dbtype}_variant_calling.vcf.log"
+        sample_list=sample_list + f"-I {species}/module/machine/{sample[i]} "
+    sample_list=sample_list + f"-o {species}/module/variants/{species}_{dbtype}_variant_calling.vcf --genotype_likelihoods_model BOTH &> {species}/module/variants/{species}_{dbtype}_variant_calling.vcf.log"
 
-    os.system(f"java -jar {GATK}  -T UnifiedGenotyper -R {species}/ref/{reference_file} {sample_list }" );
+    os.system(f"java -jar {GATK}  -T UnifiedGenotyper -R {species}/data/ref/{reference_file} {sample_list }" );
 
 # end of variant_call()
 
 
 # create pseudo database
 def pseudo_db(species, reference_file):
-    path_dir=f"{species}/align"
+    path_dir=f"{species}/module/align"
     
     file_list=os.listdir(path_dir)
 
@@ -168,22 +168,22 @@ def pseudo_db(species, reference_file):
    
     # UnifiedGenotyper caller  
     for i in range(len(sample)) :  
-        sample_list=sample_list + f"-I {species}/align/{sample[i]} "
-    sample_list=sample_list + f"-o {species}/db/{species}_pseudoDB.vcf --genotype_likelihoods_model BOTH &> {species}/db/{species}_pseudoDB.vcf.log"
+        sample_list=sample_list + f"-I {species}/module/align/{sample[i]} "
+    sample_list=sample_list + f"-o {species}/data/db/{species}_pseudoDB.vcf --genotype_likelihoods_model BOTH &> {species}/data/db/{species}_pseudoDB.vcf.log"
 
-    os.system(f"java -jar {GATK}  -T UnifiedGenotyper -R {species}/ref/{reference_file} {sample_list }" );
+    os.system(f"java -jar {GATK}  -T UnifiedGenotyper -R {species}/data/ref/{reference_file} {sample_list }" );
 
 # end of pseudo_db()
 
 
 def error_rate(species, sample, reference_file, database, dbtype) :
-    os.system(f"{SAMTOOLS}/samtools mpileup -Bf {species}/ref/{reference_file} {species}/align/{sample}_aligned.bam > {species}/error/{sample}_error\n");
+    os.system(f"{SAMTOOLS}/samtools mpileup -Bf {species}/data/ref/{reference_file} {species}/module/align/{sample}_aligned.bam > {species}/module/error/{sample}_error\n")
        
-    infile_name=species+"/error/"+sample+"_error"  # mileup output file load
+    infile_name=species+"/module/error/"+sample+"_error"  # mileup output file load
     infile=open(infile_name,"r")
 
     
-    outfile_name=species+"/error/"+sample+"_error_analysis"
+    outfile_name=species+"/module/error/"+sample+"_error_analysis"
     outfile=open(outfile_name,"w")
 
     line=infile.readline()
@@ -229,50 +229,50 @@ def error_rate(species, sample, reference_file, database, dbtype) :
         line=infile.readline()
         line_list=line.strip().split("\t")
 
-    os.system(f"rm -rf {species}/error/{sample}_error")
+    os.system(f"rm -rf {species}/module/error/{sample}_error")
     infile.close()
     outfile.close()
     
     ## database information 
-    db_name=species+"/db/"+database
+    db_name=species+"/data/db/"+database
 
-    snp_extract='grep -v "^#" '+db_name + " | cut -f1,2 | uniq > "+species+"/db/"+species+"_"+dbtype+"_uniq_pos"    
+    snp_extract='grep -v "^#" '+db_name + " | cut -f1,2 | uniq > "+species+"/data/db/"+species+"_"+dbtype+"_uniq_pos"    
     os.system(snp_extract)
     
 
-    sample_name=species+"/eror/"+sample+"_error_analysis"
-    sample_extract="cut -f1,2 "+sample_name+">"+species+"/error/"+sample+"_error_analysis_uniq_pos"     
+    sample_name=species+"/module/error/"+sample+"_error_analysis"
+    sample_extract="cut -f1,2 "+sample_name+">"+species+"/module/error/"+sample+"_error_analysis_uniq_pos"     
     os.system(sample_extract)
 
 
-    sdiff_exe="sdiff "+species+"/db/"+species+"_"+dbtype+"_uniq_pos  "+species+"/error/"+sample+"_error_analysis_uniq_pos "+ "> " +species+"/error/"+sample+"_"+dbtype+"_analysis"
+    sdiff_exe="sdiff "+species+"/data/db/"+species+"_"+dbtype+"_uniq_pos  "+species+"/module/error/"+sample+"_error_analysis_uniq_pos "+ "> " +species+"/module/error/"+sample+"_"+dbtype+"_analysis"
     os.system(sdiff_exe)
 
-    #rm_cmd=f"rm -rf {species}/db/{species}_{dbtype}_uniq_pos"
+    #rm_cmd=f"rm -rf {species}/data/db/{species}_{dbtype}_uniq_pos"
     #os.system(rm_cmd)
-    rm_cmd=f"rm -rf {species}/error/{sample}_error_analysis_uniq_pos"
+    rm_cmd=f"rm -rf {species}/module/error/{sample}_error_analysis_uniq_pos"
     os.system(rm_cmd)
 
-    sdiff_extract="awk '{if(NF==4) print $0;}' "+species+"/error/"+sample+"_"+dbtype+"_analysis"+" > "+ species+"/error/"+sample+"_"+dbtype+"_common"
+    sdiff_extract="awk '{if(NF==4) print $0;}' "+species+"/module/error/"+sample+"_"+dbtype+"_analysis"+" > "+ species+"/module/error/"+sample+"_"+dbtype+"_common"
     os.system(sdiff_extract)
 
-    rm_cmd=f"rm -rf {species}/error/{sample}_{dbtype}_analysis"  
+    rm_cmd=f"rm -rf {species}/module/error/{sample}_{dbtype}_analysis"  
     print(rm_cmd)
     #os.system(rm_cmd)
 
-    eff_variant="cut -f1,2 "+ species+"/error/"+sample+"_"+dbtype+"_common" + " > "+species+"/error/"+sample+"_"+dbtype+"_variant_pos"
+    eff_variant="cut -f1,2 "+ species+"/module/error/"+sample+"_"+dbtype+"_common" + " > "+species+"/module/error/"+sample+"_"+dbtype+"_variant_pos"
     os.system(eff_variant)
     
-    rm_cmd=f"rm -rf {species}/error/{sample}_{dbtype}_common"  
+    rm_cmd=f"rm -rf {species}/module/error/{sample}_{dbtype}_common"  
     os.system(rm_cmd)
     
     
-    sample_name=species+"/error/"+sample+"_error_analysis"
-    eff_name=species+"/error/"+sample+"_"+dbtype+"_variant_pos"
+    sample_name=species+"/module/error/"+sample+"_error_analysis"
+    eff_name=species+"/module/error/"+sample+"_"+dbtype+"_variant_pos"
     sample_infile=open(sample_name,"r")
     eff_infile=open(eff_name,"r")
    
-    error_rate_file=species+"/error/"+sample+"_"+dbtype+"_error_rate" 
+    error_rate_file=species+"/module/error/"+sample+"_"+dbtype+"_error_rate" 
     error_rate=open(error_rate_file,"w")
 
     eff_num=0
@@ -305,7 +305,7 @@ def error_rate(species, sample, reference_file, database, dbtype) :
 
     rm_cmd=f"rm -rf {sample_name}"
     os.system(rm_cmd)
-    rm_cmd=species+"/error/"+sample+"_"+dbtype+"_variant_pos"
+    rm_cmd=species+"/module/error/"+sample+"_"+dbtype+"_variant_pos"
     os.system(rm_cmd)
 
     sample_infile.close()
@@ -317,13 +317,13 @@ def error_rate(species, sample, reference_file, database, dbtype) :
 
 def qs_model(species, sample, db_type) :
     
-    os.system(f"{SAMTOOLS}/samtools view -h {species}/machine/{sample}_{db_type}_recalibrated.bam > {species}/model/{sample}_{db_type}_recalibrated.sam")
+    os.system(f"{SAMTOOLS}/samtools view -h {species}/module/machine/{sample}_{db_type}_recalibrated.bam > {species}/module/model/{sample}_{db_type}_recalibrated.sam")
     
  
-    sample_name=species+"/model/"+sample+"_"+db_type+"_recalibrated.sam"
+    sample_name=species+"/module/model/"+sample+"_"+db_type+"_recalibrated.sam"
     sample_infile=open(sample_name,"r")
     
-    sample_outname=species+"/model/"+sample+"_"+db_type+".qs"
+    sample_outname=species+"/module/model/"+sample+"_"+db_type+".qs"
     sample_outfile=open(sample_outname,"w")
 
     q_count=[]
@@ -354,7 +354,7 @@ def qs_model(species, sample, db_type) :
     sample_infile.close()
     sample_outfile.close()
     
-    sample_outname=species+"/model/"+sample+"_"+db_type+"_mean"
+    sample_outname=species+"/module/model/"+sample+"_"+db_type+"_mean"
     sample_outfile=open(sample_outname,"w")
 
     hap=0
