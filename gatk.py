@@ -38,13 +38,13 @@ def pre_align(species, reference_file) :
     os.system(f"rm -rf {home_path}/{species}/data/ref/*.dict")
 
     # preparing the reference sequence
-    os.system(f"{home_path}/{BWA}/bwa index {home_path}/{species}/data/ref/{reference_file}")      
+    os.system(f"{home_path}{BWA}/bwa index {home_path}/{species}/data/ref/{reference_file}")      
 
     # generate the fasta file index by running the following SAMtools command
-    os.system(f"{home_path}/{SAMTOOLS}/samtools faidx {home_path}/{species}/data/ref/{reference_file}")
+    os.system(f"{home_path}{SAMTOOLS}/samtools faidx {home_path}/{species}/data/ref/{reference_file}")
 
     # generate the sequence dictionary 
-    os.system(f"java -jar {home_path}/{PICARD}/CreateSequenceDictionary REFERENCE={home_path}/{species}/data/ref/{reference_file} OUTPUT={home_path}/{species}/data/ref/{reference_file[:reference_file.find('fa')]}dict")
+    os.system(f"java -jar {home_path}{PICARD} CreateSequenceDictionary REFERENCE={home_path}/{species}/data/ref/{reference_file} OUTPUT={home_path}/{species}/data/ref/{reference_file[:reference_file.find('.f')]}.dict")
 
 # end of pre_align()
 
