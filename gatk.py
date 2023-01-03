@@ -1,28 +1,31 @@
 import os
 
+# home directory setting
+home_path=os.path.expanduser("~")
+
 # program setting
-BWA="~/tools/bwa/"
-PICARD="~/tools/picard/picard.jar"
-GATK="~/tools/gatk/GenomeAnalysisTK.jar"
-SAMTOOLS="~/tools/samtools/"
+BWA="/tools/bwa/"
+PICARD="/tools/picard/picard.jar"
+GATK="/tools/gatk/GenomeAnalysisTK.jar"
+SAMTOOLS="/tools/samtools/"
 
 
 # working directory 
 def set_wd(species) :
     # result of aligning FASTQ to reference resulting BAM
-    os.mkdir(f"{species}/align")
+    os.mkdir(f"{home_path}/{species}/align")
 
     # result of recalibrating maching-provided base quality score
-    os.mkdir(f"{species}/machine")
+    os.mkdir(f"{home_path}/{species}/machine")
  
     # result of estimating sample error rate
-    os.mkdir(f"{species}/error")
+    os.mkdir(f"{home_path}/{species}/error")
 
     # result of estimating model-adjusted base quality score
-    os.mkdir(f"{species}/model")
+    os.mkdir(f"{home_path}/{species}/model")
 
     # result of genetic variant calling
-    os.mkdir(f"{species}/variants")
+    os.mkdir(f"{home_path}/{species}/variants")
 
 # end of set_wd()
 
@@ -32,16 +35,16 @@ def set_wd(species) :
 def pre_align(species, reference_file) :
 
     # if .dict file exists, delete it
-    os.system(f"rm -rf {species}/data/ref/*.dict")
+    os.system(f"rm -rf {home_path}/{species}/data/ref/*.dict")
 
     # preparing the reference sequence
-    os.system(f"{BWA}/bwa index {species}/data/ref/{reference_file}")      
+    os.system(f"{home_path}/{BWA}/bwa index {home_path}/{species}/data/ref/{reference_file}")      
 
     # generate the fasta file index by running the following SAMtools command
-    os.system(f"{SAMTOOLS}/samtools faidx {species}/data/ref/{reference_file}")
+    os.system(f"{home_path}/{SAMTOOLS}/samtools faidx {home_path}/{species}/data/ref/{reference_file}")
 
     # generate the sequence dictionary 
-    os.system(f"java -jar {PICARD}/CreateSequenceDictionary REFERENCE={species}/data/ref/{reference_file} OUTPUT={species}/data/ref/{reference_file[:reference_file.find('fa')]}dict")
+    os.system(f"java -jar {home_path}/{PICARD}/CreateSequenceDictionary REFERENCE={home_path}/{species}/data/ref/{reference_file} OUTPUT={home_path}/{species}/data/ref/{reference_file[:reference_file.find('fa')]}dict")
 
 # end of pre_align()
 
