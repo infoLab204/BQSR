@@ -58,7 +58,7 @@ def align_fastq(*realign) :
     if len(realign) ==2 :
     
         # mutiple samples
-        path_dir=f"{species}/fastq"
+        path_dir=f"{home_path}/{species}/data/fastq"
     
         file_list=os.listdir(path_dir)
 
@@ -73,27 +73,27 @@ def align_fastq(*realign) :
     # run by sample    
     for sample in sample_list :
        # mapping to reference
-       os.system(f"{BWA}/bwa mem -M -t 16 -R '@RG\\tID:{sample}\\tLB:{sample}\\tSM:{sample}\\tPL:ILLUMINA'  {species}/data/ref/{reference_file} {species}/data/fastq/{sample}_1.fastq.gz {species}/data/fastq/{sample}_2.fastq.gz > {species}/module/align/{sample}_init.sam") 
+       os.system(f"{home_path}{BWA}/bwa mem -M -t 16 -R '@RG\\tID:{sample}\\tLB:{sample}\\tSM:{sample}\\tPL:ILLUMINA'  {home_path}/{species}/data/ref/{reference_file} {home_path}/{species}/data/fastq/{sample}_1.fastq.gz {home_path}/{species}/data/fastq/{sample}_2.fastq.gz > {home_path}/{species}/module/align/{sample}_init.sam") 
 
  
        # Mark Duplicate and Sort
-       os.system(f"java -jar {PICARD}/SortSam I={species}/module/align/{sample}_init.sam TMP_DIR=temp  O={species}/module/align/{sample}_sorted.sam SORT_ORDER=coordinate")
-       os.system(f"rm -rf {species}/module/align/{sample}_init.sam")
+       os.system(f"java -jar {home_path}{PICARD}/SortSam I={home_path}/{species}/module/align/{sample}_init.sam TMP_DIR=temp  O={home_path}/{species}/module/align/{sample}_sorted.sam SORT_ORDER=coordinate")
+       os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_init.sam")
 
-       os.system(f"java -jar {PICARD}/MarkDuplicates I={species}/module/align/{sample}_sorted.sam O={species}/module/align/{sample}_dup.bam  M={species}/module/align/{sample}_metrics.txt &> {species}/module/align/{sample}_dup_bam.log" )
-       os.system(f"rm -rf {species}/module/align/{sample}_sorted.sam")
+       os.system(f"java -jar {home_path}{PICARD} MarkDuplicates I={home_path}/{species}/module/align/{sample}_sorted.sam O={home_path}/{species}/module/align/{sample}_dup.bam  M={home_path}/{species}/module/align/{sample}_metrics.txt &> {home_path}/{species}/module/align/{sample}_dup_bam.log" )
+       os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_sorted.sam")
 
        # make index file
-       os.system(f"java -jar {PICARD}/BuildBamIndex I={species}/module/align/{sample}_dup.bam")
+       os.system(f"java -jar {home_path}{PICARD} BuildBamIndex I={home_path}/{species}/module/align/{sample}_dup.bam")
 
        # Indel Realignment : realigner target Creator 
-       os.system(f"java -jar {GATK} -T RealignerTargetCreator -R {species}/data/ref/{reference_file}  -I {species}/module/align/{sample}_dup.bam -o {species}/module/align/{sample}_intervals.list &> {species}/module/align/{sample}_intervals_list.log")
+       os.system(f"java -jar {home_path}{GATK} -T RealignerTargetCreator -R {home_path}/{species}/data/ref/{reference_file}  -I {home_path}/{species}/module/align/{sample}_dup.bam -o {home_path}/{species}/module/align/{sample}_intervals.list &> {home_path}/{species}/module/align/{sample}_intervals_list.log")
 	  
        # Indel Realignment : IndelRealigner 
-       os.system(f"java -jar {GATK} -T IndelRealigner -R {species}/data/ref/{reference_file} -I {species}/module/align/{sample}_dup.bam -targetIntervals {species}/modlue/align/{sample}_intervals.list  -o  {species}/module/align/{sample}_aligned.bam &> {species}/module/align/{sample}_aligned.log")
-       os.system(f"rm -rf {species}/module/align/{sample}_dup.bam {species}/module/align/{sample}_dup.bai {species}/module/align/{sample}_dup.idx {species}/module/align/{sample}_dup_bam.log")
-       os.system(f"rm -rf {species}/module/align/{sample}_intervals.list {species}/module/align/{sample}_aligned.log");
-       os.system(f"rm -rf {species}/module/align/{sample}_intervals_list.log {species}/module/align/{sample}_metrics.txt");
+       os.system(f"java -jar {home_path}{GATK} -T IndelRealigner -R {home_path}/{species}/data/ref/{reference_file} -I {home_path}/{species}/module/align/{sample}_dup.bam -targetIntervals {home_path}/{species}/modlue/align/{sample}_intervals.list  -o  {home_path}/{species}/module/align/{sample}_aligned.bam &> {home_path}/{species}/module/align/{sample}_aligned.log")
+       os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_dup.bam {home_path}/{species}/module/align/{sample}_dup.bai {home_path}/{species}/module/align/{sample}_dup.idx {home_path}/{species}/module/align/{sample}_dup_bam.log")
+       os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_intervals.list {home_path}/{species}/module/align/{sample}_aligned.log");
+       os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_intervals_list.log {home_path}/{species}/module/align/{sample}_metrics.txt");
 
 # end of align_fastq()
 
