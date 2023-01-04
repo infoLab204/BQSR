@@ -201,7 +201,7 @@ https://www.internationalgenome.org/data-portal/sample
 
 6.	Create a pseudo database.   
     ```
-    Format: gatk.pseudo_db(“species_name”, “reference”)   
+    Format: gatk.pseudo_db(“species_name”, “reference_sequence”)   
     ```
     ___$gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
   
@@ -212,16 +212,16 @@ https://www.internationalgenome.org/data-portal/sample
 7.	Recalibrate machine-provided base quality score.   
 
     ```
-	  Format: gatk.qs_recal(“species_name”, “name of database”, “db_type”, “sample_name”)   
+	  Format: gatk.qs_recal(“species_name”, “reference_sequence”, “name of database”, “db_type”, “sample_name”)   
     ```
     
     (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   
   
-     ___$gatk.qs_recal(“human”,“dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___   
+     ___$gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___   
   
      Files HG00096_dbSNP_recalibrated.bam and HG00096_dbSNP_recalibrated.bai are created in the directory “machine”.  <br><br> 
 
-     ___$gatk.qs_recal(“human”,“human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___   
+     ___$gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___   
  
      Files HG00096_pseudoDB_recalibrated.bam and HG00096_pseudoDB_recalibrated.bai are created in the directory “machine”.   
     
