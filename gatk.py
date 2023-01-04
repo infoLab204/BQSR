@@ -252,8 +252,7 @@ def error_rate(species, sample, reference_file, database, dbtype) :
     sdiff_exe="sdiff "+home_path+"/"+species+"/data/db/"+species+"_"+dbtype+"_uniq_pos  "+home_path+"/"+species+"/module/error/"+sample+"_error_analysis_uniq_pos "+ "> " +home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_analysis"
     os.system(sdiff_exe)
 
-    #rm_cmd=f"rm -rf {home_path}/{species}/data/db/{species}_{dbtype}_uniq_pos"
-    #os.system(rm_cmd)
+
     rm_cmd=f"rm -rf {home_path}/{species}/module/error/{sample}_error_analysis_uniq_pos"
     os.system(rm_cmd)
 
@@ -261,8 +260,7 @@ def error_rate(species, sample, reference_file, database, dbtype) :
     os.system(sdiff_extract)
 
     rm_cmd=f"rm -rf {home_path}/{species}/module/error/{sample}_{dbtype}_analysis"  
-    print(rm_cmd)
-    #os.system(rm_cmd)
+    os.system(rm_cmd)
 
     eff_variant="cut -f1,2 "+ home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_common" + " > "+home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_variant_pos"
     os.system(eff_variant)
@@ -309,7 +307,7 @@ def error_rate(species, sample, reference_file, database, dbtype) :
 
     rm_cmd=f"rm -rf {sample_name}"
     os.system(rm_cmd)
-    rm_cmd=home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_variant_pos"
+    rm_cmd="rm -rf "+home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_variant_pos"
     os.system(rm_cmd)
 
     sample_infile.close()
