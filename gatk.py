@@ -115,9 +115,10 @@ def qs_recal(*recal) :
         for file_name in file_list  :
             if file_name.find("_aligned.bam") !=-1 :
                 sample_list.append(file_name[: file_name.find("_aligned.bam")])
-        print(sample_list)
+
     else :   # one sample
         sample_list.append(recal[4])
+    print(sample_list)
 
     # run by sample
     for sample in sample_list : 
