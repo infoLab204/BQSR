@@ -167,7 +167,7 @@ def pseudo_db(species, reference_file):
     sample_list=""
 
     for file_name in file_list  :
-        if file_name.find("_realigned.bam") !=-1 :
+        if file_name.find("_aligned.bam") !=-1 :
             sample.append(file_name)
    
     # UnifiedGenotyper caller  
