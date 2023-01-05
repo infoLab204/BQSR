@@ -230,7 +230,7 @@ https://www.internationalgenome.org/data-portal/sample
 8.	Call genetic variants.   
 
     ```
-	  Format: gatk.variant_call(“species_name”, “reference”, “db_type”)   
+	  Format: gatk.variant_call(“species_name”, “reference_sequence”, “db_type”)   
     ```
   
  	   ___$gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“dbSNP”)___  
@@ -246,7 +246,7 @@ https://www.internationalgenome.org/data-portal/sample
  9.	Estimate sample error rate   
   
     ```
-	  Format: gatk.error_rate(“species_name”, “sample_name”, “reference”, “name of database”, “db_type”)   
+	  Format: gatk.error_rate(“species_name”, “sample_name”, “reference_sequence”, “name of database”, “db_type”)   
     ```
     ___$gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”, “dbSNP”)___   
     
