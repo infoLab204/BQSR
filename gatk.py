@@ -325,9 +325,6 @@ def qs_model(species, sample, db_type) :
     sample_name=home_path+"/"+species+"/module/model/"+sample+"_"+db_type+"_recalibrated.sam"
     sample_infile=open(sample_name,"r")
     
-    sample_outname=home_path+"/"+species+"/module/model/"+sample+"_"+db_type+".qs"
-    sample_outfile=open(sample_outname,"w")
-
     q_count=[]
     for i in range(100) :
         q_count.append(0)
@@ -344,19 +341,13 @@ def qs_model(species, sample, db_type) :
             q_count[qscore]=q_count[qscore]+1
             i=i+1
         line=sample_infile.readline()
-
-
+   
     
-    for i in range(len(q_count)) :
-        sample_outfile.write(f"{i}\t{q_count[i]}\n")
-       
-    
+    sample_infile.close()
+	
     os.system(f"rm -rf {sample_name}")
 
-    sample_infile.close()
-    sample_outfile.close()
-    
-    sample_outname=home_path+"/"+species+"/module/model/"+sample+"_"+db_type+"_mean"
+    sample_outname=home_path+"/"+species+"/module/model/"+sample+"_"+db_type+"_qs"
     sample_outfile=open(sample_outname,"w")
 
     hap=0
