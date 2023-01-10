@@ -190,7 +190,7 @@ https://www.internationalgenome.org/data-portal/sample
 5.	Align sample FASTQ file to the reference.   
 
     ```
-    Format: gatk.align_fastq(“species_name”, “reference_sequence”, “sample_name”)   
+    Format: gatk.align_fastq(“species_name”, “reference”, “sample_name”)   
     ```
   
 	___$gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)___   
@@ -201,7 +201,7 @@ https://www.internationalgenome.org/data-portal/sample
 
 6.	Create a pseudo database.   
     ```
-    Format: gatk.pseudo_db(“species_name”, “reference_sequence”)   
+    Format: gatk.pseudo_db(“species_name”, “reference”)   
     ```
     ___$gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
   
@@ -212,7 +212,7 @@ https://www.internationalgenome.org/data-portal/sample
 7.	Recalibrate machine-provided base quality score.   
 
     ```
-	  Format: gatk.qs_recal(“species_name”, “reference_sequence”, “name of database”, “db_type”, “sample_name”)   
+	  Format: gatk.qs_recal(“species_name”, “reference”, “name of database”, “db_type”, “sample_name”)   
     ```
     
     (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   
@@ -230,7 +230,7 @@ https://www.internationalgenome.org/data-portal/sample
 8.	Call genetic variants.   
 
     ```
-	  Format: gatk.variant_call(“species_name”, “reference_sequence”, “db_type”)   
+	  Format: gatk.variant_call(“species_name”, “reference”, “db_type”)   
     ```
   
  	   ___$gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“dbSNP”)___  
@@ -246,7 +246,7 @@ https://www.internationalgenome.org/data-portal/sample
  9.	Estimate sample error rate   
   
     ```
-	  Format: gatk.error_rate(“species_name”, “sample_name”, “reference_sequence”, “name of database”, “db_type”)   
+	  Format: gatk.error_rate(“species_name”, “sample_name”, “reference”, “name of database”, “db_type”)   
     ```
     ___$gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”, “dbSNP”)___   
     
