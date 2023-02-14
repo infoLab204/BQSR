@@ -8,7 +8,7 @@ This tutorial guides you on how to call genetic variants and related analysis st
 Let’s get started!!
 <br><br><br>
 
-## (*) Part I: Install tools
+## Part I: Install tools
 1.	Create a directory  
 Create the directory “tools” in your home directory.   
 ___$mkdir tools___  
@@ -56,7 +56,7 @@ ___$mv GenomeAnalysisTK-3.8-1-0-gf15c1c3ef  gatk___         &nbsp;&nbsp;&nbsp;&n
 
 	(note) The up-to-date version of GATK is gatk-4.3.0.0 (Oct 12, 2022, https://github.com/broadinstitute/gatk/releases/). 
 <br><br><br> 
-## (*) Part II: Data download
+## Part II: Data download
 1. Create directories  
     a. Assuming that you are working with human data, make a directory “human” under your home directory.  
     b. Make directories “data” and “module” under directory “human” (see Fig. 1).   
@@ -133,7 +133,7 @@ https://www.internationalgenome.org/data-portal/sample
     *	rice: https://zenodo.org/record/7488383/files/rice_pseudoDB.vcf.gz?download=1
     *	chickpea: https://zenodo.org/record/7487929/files/chickpea_pseudoDB.vcf.gz?download=1
 <br><br><br>
-## (*) Part III: Variant calling with analysis
+## Part III: Variant calling with analysis
 1.	Download “gatk.py” module from the github repository into directory “tools”.   
 	___$curl -L -O https://github.com/infoLab204/pseudo_DB/raw/main/gatk.py___  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download “gatk.py” module   
 
