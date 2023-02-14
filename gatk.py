@@ -12,20 +12,23 @@ SAMTOOLS="/tools/samtools/"
 
 # working directory 
 def set_wd(species) :
+    # create module directory
+    os.mkdir(f"{home_path}/{species}/module")
+
     # result of aligning FASTQ to reference resulting BAM
-    os.mkdir(f"{home_path}/{species}/align")
+    os.mkdir(f"{home_path}/{species}/module/align")
 
     # result of recalibrating maching-provided base quality score
-    os.mkdir(f"{home_path}/{species}/machine")
+    os.mkdir(f"{home_path}/{species}/module/machine")
  
     # result of estimating sample error rate
-    os.mkdir(f"{home_path}/{species}/error")
+    os.mkdir(f"{home_path}/{species}/module/error")
 
     # result of estimating model-adjusted base quality score
-    os.mkdir(f"{home_path}/{species}/model")
+    os.mkdir(f"{home_path}/{species}/module/model")
 
     # result of genetic variant calling
-    os.mkdir(f"{home_path}/{species}/variants")
+    os.mkdir(f"{home_path}/{species}/module/variants")
 
 # end of set_wd()
 
