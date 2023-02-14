@@ -123,6 +123,8 @@ def qs_recal(*recal) :
         sample_list.append(recal[4])
     print(sample_list)
 
+    os.system(f"gzip -d {home_path}/{species}/data/db/{database}.gz")
+    
     # run by sample
     for sample in sample_list : 
         # BaseRecalibrator 
