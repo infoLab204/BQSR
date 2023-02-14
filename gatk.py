@@ -80,7 +80,7 @@ def align_fastq(*realign) :
 
  
        # Mark Duplicate and Sort
-       os.system(f"java -jar {home_path}{PICARD}/SortSam I={home_path}/{species}/module/align/{sample}_init.sam TMP_DIR=temp  O={home_path}/{species}/module/align/{sample}_sorted.sam SORT_ORDER=coordinate")
+       os.system(f"java -jar {home_path}{PICARD} SortSam I={home_path}/{species}/module/align/{sample}_init.sam TMP_DIR=temp  O={home_path}/{species}/module/align/{sample}_sorted.sam SORT_ORDER=coordinate")
        os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_init.sam")
 
        os.system(f"java -jar {home_path}{PICARD} MarkDuplicates I={home_path}/{species}/module/align/{sample}_sorted.sam O={home_path}/{species}/module/align/{sample}_dup.bam  M={home_path}/{species}/module/align/{sample}_metrics.txt &> {home_path}/{species}/module/align/{sample}_dup_bam.log" )
