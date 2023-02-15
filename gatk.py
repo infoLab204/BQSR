@@ -196,12 +196,12 @@ def pseudo_db(species, reference_file):
 
 def error_rate(species, sample, reference_file, database, dbtype) :
     os.system(f"{home_path}{SAMTOOLS}/samtools mpileup -Bf {home_path}/{species}/data/ref/{reference_file} {home_path}/{species}/module/align/{sample}_aligned.bam > {home_path}/{species}/module/error/{sample}_error\n")
-       
-    infile_name=home_path+"/"+species+"/module/error/"+sample+"_error"  # mileup output file load
+    
+    infile_name=f"{home_path}/{species}/module/error/{sample}_error"  # mileup output file load
     infile=open(infile_name,"r")
 
     
-    outfile_name=home_path+"/"+species+"/module/error/"+sample+"_error_analysis"
+    outfile_name=f"{home_path}/{species}/module/error/{sample}_error_analysis"
     outfile=open(outfile_name,"w")
 
     line=infile.readline()
@@ -252,59 +252,70 @@ def error_rate(species, sample, reference_file, database, dbtype) :
     outfile.close()
     
 	
-    ## database information 
+    ## database check
     vcf_dir=f"{home_path}/{species}/data/db"
     vcf_list=os.listdir(vcf_dir)
-    if database in vcf_list and  database.find(".gz") > 0 :
+
+    if database not in vcf_list :
+        sys.exit("Not found database")
+
+    if database in vcf_list and ".gz" in database :
         os.system(f"gzip -d {home_path}/{species}/data/db/{database}")
         database=database[:database.find(".gz")]
-    elif database in vcf_list and database.find(".gz")==-1 :
-        database=database
-    else :
-        sys.exit("Not found database")
-	
-    db_name=home_path+"/"+species+"/data/db/"+database
 
-    snp_extract='grep -v "^#" '+db_name + " | cut -f1,2 | uniq > "+home_path+"/"+species+"/data/db/"+species+"_"+dbtype+"_uniq_pos"    
-    os.system(snp_extract)
+    ## database unique position check
+    db_name=f"{home_path}/{species}/data/db/{database}"
+    db_uniq_check=f"{home_path}/{species}/data/db/{species}_{dbtype}_uniq_pos"
+
+    db_dir=f"{home_path}/{species}/data/db"
+    db_list=os.listdir(db_dir)
+    if db_uniq_check not in db_list :
+        snp_extract=f'grep -v "^#" {db_name}  | cut -f1,2 | uniq > {home_path}/{species}/data/db/{species}_{dbtype}_uniq_pos'    # database uniq position search
+        os.system(snp_extract)
     
+    sample_uniq_check=f"{home_path}/{species}/module/error/{sample}_error_analysis_uniq_pos"
+    sample_dir=f"{home_path}/{species}/module/error"
+    sample_list=os.listdir(sample_dir)
 
-    sample_name=home_path+"/"+species+"/module/error/"+sample+"_error_analysis"
-    sample_extract="cut -f1,2 "+sample_name+">"+home_path+"/"+species+"/module/error/"+sample+"_error_analysis_uniq_pos"     
-    os.system(sample_extract)
+    if sample_uniq_check not in sample_list :
+        sample_name=f"{home_path}/{species}/module/error/{sample}_error_analysis"
+        sample_extract=f"cut -f1,2 {sample_name} > {home_path}/{species}/module/error/{sample}_error_analysis_uniq_pos"     # sample uniq position search
+        os.system(sample_extract)
 
 
     sdiff_exe="sdiff "+home_path+"/"+species+"/data/db/"+species+"_"+dbtype+"_uniq_pos  "+home_path+"/"+species+"/module/error/"+sample+"_error_analysis_uniq_pos "+ "> " +home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_analysis"
     os.system(sdiff_exe)
 
 
-    rm_cmd=f"rm -rf {home_path}/{species}/module/error/{sample}_error_analysis_uniq_pos"
-    os.system(rm_cmd)
-
-    sdiff_extract="awk '{if(NF==4) print $0;}' "+home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_analysis"+" > "+ home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_common"
+    awk_cmd="awk '{if(NF==4) print $0;}'"
+    sdiff_extract=f"{awk_cmd} {home_path}/{species}/module/error/{sample}_{dbtype}_analysis > {home_path}/{species}/module/error/{sample}_{dbtype}_common"
     os.system(sdiff_extract)
 
-    rm_cmd=f"rm -rf {home_path}/{species}/module/error/{sample}_{dbtype}_analysis"  
-    os.system(rm_cmd)
-
-    eff_variant="cut -f1,2 "+ home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_common" + " > "+home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_variant_pos"
+    eff_variant=f"cut -f1,2 {home_path}/{species}/module/error/{sample}_{dbtype}_common  > {home_path}/{species}/module/error/{sample}_{dbtype}_variant_pos"
     os.system(eff_variant)
-    
+   
     rm_cmd=f"rm -rf {home_path}/{species}/module/error/{sample}_{dbtype}_common"  
     os.system(rm_cmd)
     
-    
-    sample_name=home_path+"/"+species+"/module/error/"+sample+"_error_analysis"
-    eff_name=home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_variant_pos"
+    sample_name=f"{home_path}/{species}/module/error/{sample}_error_analysis"
+    eff_name=f"{home_path}/{species}/module/error/{sample}_{dbtype}_variant_pos"
+
     sample_infile=open(sample_name,"r")
     eff_infile=open(eff_name,"r")
-   
-    error_rate_file=home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_error_rate" 
+
+    error_rate_file=f"{home_path}/{species}/module/error/{sample}_{dbtype}_error_rate"
     error_rate=open(error_rate_file,"w")
 
-    eff_num=0
-    mismatch_num=0
+    mismatch_str="awk '{ sum+=$5} END { print sum;}'"
+    mismatch_cmd=f"{mismatch_str} {sample_name} > {home_path}/{species}/module/error/{sample}_mismatch"
+    os.system(mismatch_cmd)
 
+    mismatch_name=f"{home_path}/{species}/module/error/{sample}_mismatch"
+
+    mismatch_infile=open(mismatch_name,"r")
+    mismatch_num=int(mismatch_infile.readline())
+
+    eff_num=0
     while True :
         eff_base=eff_infile.readline()
 
@@ -320,20 +331,11 @@ def error_rate(species, sample, reference_file, database, dbtype) :
                 break
 
             base_list=base_sample.split('\t') 
-
-            mismatch_num=mismatch_num+int(base_list[4])
-
             if eff_list[0]==base_list[0] and eff_list[1]==base_list[1] :
                 eff_num=eff_num+int(base_list[4])
                 break
     print(eff_num, mismatch_num, (mismatch_num-eff_num)/mismatch_num)
     error_rate.write(f"{sample}\t{(mismatch_num-eff_num)/mismatch_num}")
-
-
-    rm_cmd=f"rm -rf {sample_name}"
-    os.system(rm_cmd)
-    rm_cmd="rm -rf "+home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_variant_pos"
-    os.system(rm_cmd)
 
     sample_infile.close()
     eff_infile.close()
