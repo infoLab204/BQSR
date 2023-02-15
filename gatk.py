@@ -126,13 +126,14 @@ def qs_recal(*recal) :
 
     vcf_dir=f"{home_path}/{species}/data/db"
     vcf_list=os.listdir(vcf_dir)
-    if database in vcf_list and  database.find(".gz") > 0 :
+
+    if database not in vcf_list :
+        sys.exit("Not found database")
+
+    if database in vcf_list and ".gz" in database :
         os.system(f"gzip -d {home_path}/{species}/data/db/{database}")
         database=database[:database.find(".gz")]
-    elif database in vcf_list and database.find(".gz")==-1 :
-        database=database
-    else :
-        sys.exit("Not found database")
+
 
     # run by sample
     for sample in sample_list : 
