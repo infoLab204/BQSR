@@ -334,7 +334,7 @@ def error_rate(species, sample, reference_file, database, dbtype) :
             if eff_list[0]==base_list[0] and eff_list[1]==base_list[1] :
                 eff_num=eff_num+int(base_list[4])
                 break
-    print(eff_num, mismatch_num, (mismatch_num-eff_num)/mismatch_num)
+    print(sample, (mismatch_num-eff_num)/mismatch_num)
     error_rate.write(f"{sample}\t{(mismatch_num-eff_num)/mismatch_num}")
 
     sample_infile.close()
