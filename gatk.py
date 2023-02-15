@@ -189,7 +189,7 @@ def pseudo_db(species, reference_file):
         sample_list=sample_list + f"-I {home_path}/{species}/module/align/{sample[i]} "
     sample_list=sample_list + f"-o {home_path}/{species}/data/db/{species}_pseudoDB.vcf --genotype_likelihoods_model BOTH &> {home_path}/{species}/data/db/{species}_pseudoDB.vcf.log"
 
-    os.system(f"java -jar {home_path}{GATK}  -T UnifiedGenotyper -R {home_path}{species}/data/ref/{reference_file} {sample_list }" );
+    os.system(f"java -jar {home_path}{GATK}  -T UnifiedGenotyper -R {home_path}/{species}/data/ref/{reference_file} {sample_list}")
 
 # end of pseudo_db()
 
