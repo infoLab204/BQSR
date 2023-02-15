@@ -87,7 +87,7 @@ def align_fastq(*realign) :
        os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_sorted.sam")
 
        # make index file
-       os.system(f"java -jar {home_path}{PICARD} BuildBamIndex I={home_path}/{species}/module/align/{sample}_dup.bam")
+       os.system(f"java -jar {home_path}{PICARD} BuildBamIndex I={home_path}/{species}/module/align/{sample}_dup.bam O=={home_path}/{species}/module/align/{sample}_dup.bai")
 
        # Indel Realignment : realigner target Creator 
        os.system(f"java -jar {home_path}{GATK} -T RealignerTargetCreator -R {home_path}/{species}/data/ref/{reference_file}  -I {home_path}/{species}/module/align/{sample}_dup.bam -o {home_path}/{species}/module/align/{sample}_intervals.list &> {home_path}/{species}/module/align/{sample}_intervals_list.log")
