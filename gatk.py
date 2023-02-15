@@ -61,7 +61,7 @@ def align_fastq(*realign) :
     sample_list=[]     # sample list
     if len(realign) ==2 :
     
-        # mutiple samples
+        # multiple samples
         path_dir=f"{home_path}/{species}/data/fastq"
     
         file_list=os.listdir(path_dir)
@@ -152,7 +152,6 @@ def qs_recal(*recal) :
 # variant discovery 
 def variant_call(species, reference_file, dbtype):
     path_dir=f"{home_path}/{species}/module/machine"
-    
     file_list=os.listdir(path_dir)
 
     sample=[]
@@ -355,8 +354,7 @@ def error_rate(species, sample, reference_file, database, dbtype) :
 def qs_model(species, sample, db_type) :
     
     os.system(f"{home_path}{SAMTOOLS}/samtools view -h {home_path}/{species}/module/machine/{sample}_{db_type}_recalibrated.bam > {home_path}/{species}/module/model/{sample}_{db_type}_recalibrated.sam")
-    
- 
+     
     sample_name=f"{home_path}/{species}/module/model/{sample}_{db_type}_recalibrated.sam"
     sample_infile=open(sample_name,"r")
     
