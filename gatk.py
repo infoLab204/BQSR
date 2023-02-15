@@ -307,7 +307,7 @@ def error_rate(species, sample, reference_file, database, dbtype) :
     sample_infile=open(sample_name,"r")
     eff_infile=open(eff_name,"r")
 
-    error_rate_file=f"{home_path}/{species}/module/error/{sample}_{dbtype}_error_rate"
+    error_rate_file=f"{home_path}/{species}/module/error/{sample}_{dbtype}_erate"
     error_rate=open(error_rate_file,"w")
 
     mismatch_str="awk '{ sum+=$5} END { print sum;}'"
@@ -380,7 +380,7 @@ def qs_model(species, sample, db_type) :
 	
     os.system(f"rm -rf {sample_name}")
 
-    sample_outname=home_path+"/"+species+"/module/model/"+sample+"_"+db_type+"_qs"
+    sample_outname=f"{home_path}/{species}/module/model/{sample}_{db_type}_qs"
     sample_outfile=open(sample_outname,"w")
 
     hap=0
