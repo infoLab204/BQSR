@@ -282,14 +282,18 @@ def error_rate(species, sample, reference_file, database, dbtype) :
         sample_extract=f"cut -f1,2 {sample_name} > {home_path}/{species}/module/error/{sample}_error_analysis_uniq_pos"     # sample uniq position search
         os.system(sample_extract)
 
-
-    sdiff_exe="sdiff "+home_path+"/"+species+"/data/db/"+species+"_"+dbtype+"_uniq_pos  "+home_path+"/"+species+"/module/error/"+sample+"_error_analysis_uniq_pos "+ "> " +home_path+"/"+species+"/module/error/"+sample+"_"+dbtype+"_analysis"
+    sdiff_exe=f"sdiff {home_path}/{species}/data/db/{species}_{dbtype}_uniq_pos  {home_path}/{species}/module/error/{sample}_error_analysis_uniq_pos > {home_path}/{species}/module/error/{sample}_{dbtype}_analysis"   ## database and sample analysis file 
     os.system(sdiff_exe)
 
+    rm_cmd=f"rm -rf {home_path}/{species}/module/error/{sample}_error_analysis_uniq_pos"
+    os.system(rm_cmd)
 
     awk_cmd="awk '{if(NF==4) print $0;}'"
     sdiff_extract=f"{awk_cmd} {home_path}/{species}/module/error/{sample}_{dbtype}_analysis > {home_path}/{species}/module/error/{sample}_{dbtype}_common"
     os.system(sdiff_extract)
+
+    rm_cmd=f"rm -rf {home_path}/{species}/module/error/{sample}_{dbtype}_analysis"
+    os.system(rm_cmd)
 
     eff_variant=f"cut -f1,2 {home_path}/{species}/module/error/{sample}_{dbtype}_common  > {home_path}/{species}/module/error/{sample}_{dbtype}_variant_pos"
     os.system(eff_variant)
@@ -337,6 +341,9 @@ def error_rate(species, sample, reference_file, database, dbtype) :
     print(sample, (mismatch_num-eff_num)/mismatch_num)
     error_rate.write(f"{sample}\t{(mismatch_num-eff_num)/mismatch_num}")
 
+    rm_cmd=f"rm -rf {home_path}/{species}/module/error/{sample}_{dbtype}_variant_pos"
+    os.system(rm_cmd)
+	
     sample_infile.close()
     eff_infile.close()
     error_rate.close()
