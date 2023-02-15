@@ -251,7 +251,18 @@ def error_rate(species, sample, reference_file, database, dbtype) :
     infile.close()
     outfile.close()
     
+	
     ## database information 
+    vcf_dir=f"{home_path}/{species}/data/db"
+    vcf_list=os.listdir(vcf_dir)
+    if database in vcf_list and  database.find(".gz") > 0 :
+        os.system(f"gzip -d {home_path}/{species}/data/db/{database}")
+        database=database[:database.find(".gz")]
+    elif database in vcf_list and database.find(".gz")==-1 :
+        database=database
+    else :
+        sys.exit("Not found database")
+	
     db_name=home_path+"/"+species+"/data/db/"+database
 
     snp_extract='grep -v "^#" '+db_name + " | cut -f1,2 | uniq > "+home_path+"/"+species+"/data/db/"+species+"_"+dbtype+"_uniq_pos"    
