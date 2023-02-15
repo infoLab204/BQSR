@@ -94,7 +94,7 @@ def align_fastq(*realign) :
 	  
        # Indel Realignment : IndelRealigner 
        os.system(f"java -jar {home_path}{GATK} -T IndelRealigner -R {home_path}/{species}/data/ref/{reference_file} -I {home_path}/{species}/module/align/{sample}_dup.bam -targetIntervals {home_path}/{species}/module/align/{sample}_intervals.list  -o  {home_path}/{species}/module/align/{sample}_aligned.bam &> {home_path}/{species}/module/align/{sample}_aligned.log")
-       os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_dup.bam {home_path}/{species}/module/align/{sample}_dup.bai {home_path}/{species}/module/align/{sample}_dup.idx {home_path}/{species}/module/align/{sample}_dup_bam.log")
+       os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_dup.bam {home_path}/{species}/module/align/{sample}_dup.bai  {home_path}/{species}/module/align/{sample}_dup_bam.log")
        os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_intervals.list {home_path}/{species}/module/align/{sample}_aligned.log");
        os.system(f"rm -rf {home_path}/{species}/module/align/{sample}_intervals_list.log {home_path}/{species}/module/align/{sample}_metrics.txt");
 
