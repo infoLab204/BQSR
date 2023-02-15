@@ -357,7 +357,7 @@ def qs_model(species, sample, db_type) :
     os.system(f"{home_path}{SAMTOOLS}/samtools view -h {home_path}/{species}/module/machine/{sample}_{db_type}_recalibrated.bam > {home_path}/{species}/module/model/{sample}_{db_type}_recalibrated.sam")
     
  
-    sample_name=home_path+"/"+species+"/module/model/"+sample+"_"+db_type+"_recalibrated.sam"
+    sample_name=f"{home_path}/{species}/module/model/{sample}_{db_type}_recalibrated.sam"
     sample_infile=open(sample_name,"r")
     
     q_count=[]
