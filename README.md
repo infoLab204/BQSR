@@ -137,7 +137,7 @@ https://www.internationalgenome.org/data-portal/sample
 ## Part III: Variant calling with analysis
 1.	Download “gatk.py” module from the github repository into directory “tools”.   
 	___$curl -L -O https://github.com/infoLab204/pseudo_DB/raw/main/gatk.py___  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download “gatk.py” module   
-
+<br>
 
 2.	Go to the directory “tools” and import the module as follows.   
 
@@ -154,6 +154,7 @@ https://www.internationalgenome.org/data-portal/sample
     *	___qs_model( )___: estimate model-adjusted base quality score   
 
     (note) execute the above functions at directory “tools”.
+<br>
 
 3.	Create subdirectories under directory “module”. 
   
@@ -170,6 +171,7 @@ https://www.internationalgenome.org/data-portal/sample
     *	___model___ : result of estimating model-adjusted base quality score   
     *	___variants___ : result of genetic variant calling   
     
+<br>
 
 4.	Create file names for the alignment under directory “ref”.    
 
@@ -187,6 +189,7 @@ https://www.internationalgenome.org/data-portal/sample
     *	GRCh38_full_analysis_set_plus_decoy_hla.fa.pac
     *	GRCh38_full_analysis_set_plus_decoy_hla.fa.sa
     *	GRCh38_full_analysis_set_plus_decoy_hla.dict 
+<br>
 
 5.	Align sample FASTQ file to the reference.   
 
@@ -194,19 +197,29 @@ https://www.internationalgenome.org/data-portal/sample
     Format: gatk.align_fastq(“species_name”, “reference”, [“sample_name”])   
     ```
     (note) The name of each sample in the “fastq” directory should be given when samples are aligned one by one. On the other hand, when sample names are not given, all samples are aligned at once.    
+    <br>
+     
+     ___Case 1: file name is given___    
      
 	___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)___   
   
-    Files HG00096_aligned.bam and HG00096_aligned.bai are created in the directory “align”.       
+    Files HG00096_aligned.bam and HG00096_aligned.bai are created in the directory “align”.     
+    <br>
+    
+    ___Case 2: file name is not given___    
     
 	___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
+
+    (note) With given all human samples, human_sample_aligned.bam and human_sample_aligned.bai are created in the directory “align”.
 <br>
+
 
 6.	Create a pseudo database.   
     ```
     Format: gatk.pseudo_db(“species_name”, “reference”)   
     ```
     (note) Construct the pseudoDB using all samples in the “align” directory.    
+    <br>
     
     ___>>>gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
     
@@ -217,13 +230,13 @@ https://www.internationalgenome.org/data-portal/sample
 7.	Recalibrate machine-provided base quality score.   
 
     ```
-	  Format: gatk.qs_recal(“species_name”, “reference”, “name of database”, “db_type”, “sample_name”)   
+	  Format: gatk.qs_recal(“species_name”, “reference”, “name of database”, “db_type”, [“sample_name”])   
     ```
     
     (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   
     (note) The name of each sample in the “align” directory should be given when samples are recalibrated one by one. On the other hand, when sample names are not given, all samples are recalibrated at once.    
     <br>
-    Case 1: file name is given 
+    ___Case 1: file name is given___ 
   
      ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___   
   
@@ -232,8 +245,9 @@ https://www.internationalgenome.org/data-portal/sample
      ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___   
  
      Files HG00096_pseudoDB_recalibrated.bam and HG00096_pseudoDB_recalibrated.bai are created in the directory “machine”.   
+     <br>
      
-     Case 2: file name is not given    
+     ___Case 2: file name is not given___    
      
     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa” ,“dbSNP_b151.vcf”,“dbSNP”)___
 
