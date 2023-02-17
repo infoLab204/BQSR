@@ -199,14 +199,14 @@ https://www.internationalgenome.org/data-portal/sample
     (note) The name of each sample in the “fastq” directory should be given when samples are aligned one by one. On the other hand, when sample names are not given, all samples are aligned at once.    
     <br>
      
-     ___Case 1: file name is given___    
+     ___Case 1: sample name is given___    
      
 	___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)___   
   
     Files HG00096_aligned.bam and HG00096_aligned.bai are created in the directory “align”.     
     <br>
     
-    ___Case 2: file name is not given___    
+    ___Case 2: sample name is not given___    
     
 	___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
 
@@ -236,7 +236,7 @@ https://www.internationalgenome.org/data-portal/sample
     (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   
     (note) The name of each sample in the “align” directory should be given when samples are recalibrated one by one. On the other hand, when sample names are not given, all samples are recalibrated at once.    
     <br>
-    ___Case 1: file name is given___ 
+    ___Case 1: sample name is given___ 
   
      ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___   
   
@@ -247,7 +247,7 @@ https://www.internationalgenome.org/data-portal/sample
      Files HG00096_pseudoDB_recalibrated.bam and HG00096_pseudoDB_recalibrated.bai are created in the directory “machine”.   
      <br>
      
-     ___Case 2: file name is not given___    
+     ___Case 2: sample name is not given___    
      
     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa” ,“dbSNP_b151.vcf”,“dbSNP”)___
 
