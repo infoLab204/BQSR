@@ -191,21 +191,25 @@ https://www.internationalgenome.org/data-portal/sample
 5.	Align sample FASTQ file to the reference.   
 
     ```
-    Format: gatk.align_fastq(“species_name”, “reference”, “sample_name”)   
+    Format: gatk.align_fastq(“species_name”, “reference”, [“sample_name”])   
     ```
-  
+    (note) The name of each sample in the “fastq” directory should be given when samples are aligned one by one. On the other hand, when sample names are not given, all samples are aligned at once.    
+     
 	___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)___   
   
-    Files HG00096_aligned.bam and HG00096_aligned.bai are created in the directory “align”.   
+    Files HG00096_aligned.bam and HG00096_aligned.bai are created in the directory “align”.       
     
+	___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
 <br>
 
 6.	Create a pseudo database.   
     ```
     Format: gatk.pseudo_db(“species_name”, “reference”)   
     ```
+    (note) Construct the pseudoDB using all samples in the “align” directory.    
+    
     ___>>>gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
-  
+    
       File “human_pseudoDB.vcf” and “human_pseudoDB.vcf.idx” are created in the directory “db”.    
     
 <br>
@@ -217,6 +221,9 @@ https://www.internationalgenome.org/data-portal/sample
     ```
     
     (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   
+    (note) The name of each sample in the “align” directory should be given when samples are recalibrated one by one. On the other hand, when sample names are not given, all samples are recalibrated at once.    
+    <br>
+    Case 1: file name is given 
   
      ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___   
   
@@ -225,6 +232,17 @@ https://www.internationalgenome.org/data-portal/sample
      ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___   
  
      Files HG00096_pseudoDB_recalibrated.bam and HG00096_pseudoDB_recalibrated.bai are created in the directory “machine”.   
+     
+     Case 2: file name is not given    
+     
+    ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa” ,“dbSNP_b151.vcf”,“dbSNP”)___
+
+    (note) With given all human samples, human_dbSNP_recalibrated.bam and human_dbSNP_recalibrated.bai are created in the directory “machine”.    
+
+    ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa” ,“human_pseudoDB.vcf”,“pseudoDB”)___
+    
+    (note) With given human samples, human_pseudoDB_recalibrated.bam and human_pseudoDB_recalibrated.bai are created in the directory “machine”.
+
     
 <br>
 
