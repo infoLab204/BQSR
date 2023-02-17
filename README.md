@@ -18,8 +18,9 @@ ___$mkdir tools___
     *	__BWA__: https://sourceforge.net/projects/bio-bwa/files/
     *	__Samtools__: https://github.com/samtools/samtools/releases/
     *	__Picard__: https://github.com/broadinstitute/pocard/releases/
-    *	__GATK__: https://github.com/broadinstitute/gatk/releases/
-
+    *	__GATK__: https://github.com/broadinstitute/gatk/releases/    
+    
+    (note) The dependent libraries (e.g., bzip2-devel, ncurses-devel, xz-devel, zlib-devel, and curl-devel) should be installed before installing BWA and Samtools. 
 3.	Download and install BWA(Burrows-Wheeler Aligner) using the following commands.  
 ___$wget https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.12.tar.bz2___       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download  
 ___$bunzip2 bwa-0.7.12.tar.bz2___  	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# unzip and untar file  
@@ -140,7 +141,7 @@ https://www.internationalgenome.org/data-portal/sample
 
 2.	Go to the directory “tools” and import the module as follows.   
 
-     ___$import  gatk___        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# import the “gatk.py” module   
+     ___>>>import  gatk___        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# import the “gatk.py” module   
   
     (note) The “gatk.py” module contains the following functions:   
     *	___set_wd( )___: set working directory   
@@ -160,7 +161,7 @@ https://www.internationalgenome.org/data-portal/sample
       Format: gatk.set_wd(“species_name”)   
     ```
     
-     ___$gatk.set_wd(“human”)___          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# create subdirectories   
+     ___>>>gatk.set_wd(“human”)___          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# create subdirectories   
 
     The list of subdirectories created under directory “module”:   
     *	___align___ : results of aligning FASTQ to reference   
@@ -176,7 +177,7 @@ https://www.internationalgenome.org/data-portal/sample
     Format: gatk.pre_align(“species_name”, “reference_file”)   
     ```
   
-	 ___$gatk.pre_align(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
+	 ___>>>gatk.pre_align(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
     
     The following files are created in the directory “ref”:
     *	GRCh38_full_analysis_set_plus_decoy_hla.fa.amb
@@ -193,7 +194,7 @@ https://www.internationalgenome.org/data-portal/sample
     Format: gatk.align_fastq(“species_name”, “reference”, “sample_name”)   
     ```
   
-	___$gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)___   
+	___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)___   
   
     Files HG00096_aligned.bam and HG00096_aligned.bai are created in the directory “align”.   
     
@@ -203,7 +204,7 @@ https://www.internationalgenome.org/data-portal/sample
     ```
     Format: gatk.pseudo_db(“species_name”, “reference”)   
     ```
-    ___$gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
+    ___>>>gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
   
       File “human_pseudoDB.vcf” and “human_pseudoDB.vcf.idx” are created in the directory “db”.    
     
@@ -217,11 +218,11 @@ https://www.internationalgenome.org/data-portal/sample
     
     (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   
   
-     ___$gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___   
+     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___   
   
      Files HG00096_dbSNP_recalibrated.bam and HG00096_dbSNP_recalibrated.bai are created in the directory “machine”.  <br><br> 
 
-     ___$gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___   
+     ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___   
  
      Files HG00096_pseudoDB_recalibrated.bam and HG00096_pseudoDB_recalibrated.bai are created in the directory “machine”.   
     
@@ -233,11 +234,11 @@ https://www.internationalgenome.org/data-portal/sample
 	  Format: gatk.variant_call(“species_name”, “reference”, “db_type”)   
     ```
   
- 	   ___$gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“dbSNP”)___  
+ 	   ___>>>gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“dbSNP”)___  
   
      Files “human_dbSNP_variant_calling.vcf” and “human_dbSNP_variant_calling.vcf.idx” are created in the directory “variants”.   <br><br>
   
-     ___$gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“pseudoDB”)___   
+     ___>>>gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“pseudoDB”)___   
   
      FIles “human_pseudoDB_variant_calling.vcf” and “human_pseudoDB_variant_calling.vcf.idx” are created in the directory “variants”.   
     
@@ -248,11 +249,11 @@ https://www.internationalgenome.org/data-portal/sample
     ```
 	  Format: gatk.error_rate(“species_name”, “sample_name”, “reference”, “name of database”, “db_type”)   
     ```
-    ___$gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”, “dbSNP”)___   
+    ___>>>gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”, “dbSNP”)___   
     
     File “HG00096_dbSNP_erate” is created in the directory “error”.   <br><br>
     
-    ___$gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”, “pseudoDB”)___   
+    ___>>>gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”, “pseudoDB”)___   
     
     File “HG00096_pseudoDB_erate” is created in the directory “error”.
   
@@ -264,11 +265,11 @@ https://www.internationalgenome.org/data-portal/sample
     Format: gatk.qs_model(“species_name”, “sample_name”, “db_type”)   
     ```
   
-      ___$gatk.qs_model(“human”,“HG00096”, “dbSNP”)___   
+      ___>>>gatk.qs_model(“human”,“HG00096”, “dbSNP”)___   
   
       File “HG00096_dbSNP_qs” is created in the directory “model”   <br><br>
   
-      ___$gatk.qs_model(“human”,“HG00096”, “pseudoDB”)___  
+      ___>>>gatk.qs_model(“human”,“HG00096”, “pseudoDB”)___  
   
       File “HG00096_pseudoDB_qs” is created in directory “model”   
   
