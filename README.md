@@ -199,7 +199,7 @@ https://www.internationalgenome.org/data-portal/sample
     Format: gatk.align_fastq(“species_name”, “reference”, “sample_name”)   
     ```
     ___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)___   
-  
+    
     (note) Files HG00096_aligned.bam and HG00096_aligned.bai are created in the directory “align” with a sample HG00096.    <br>        
 
     <br>
@@ -211,7 +211,7 @@ https://www.internationalgenome.org/data-portal/sample
     ```
     
     ___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
-
+    
     (note) Files human_aligned.bam and human_aligned.bai are created in the directory “align” with all human samples.    
 <br>
 
@@ -223,7 +223,7 @@ https://www.internationalgenome.org/data-portal/sample
     (note) Constructed pseudoDB used all samples in the “align” directory.        
     <br>
     
-    ___>>>gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
+    ___>>>gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___       
     
       File “human_pseudoDB.vcf” and “human_pseudoDB.vcf.idx” are created in the directory “db”.    
     
@@ -239,12 +239,12 @@ https://www.internationalgenome.org/data-portal/sample
     
     (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   <br><br>
     
-     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___   
-  
+     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___     
+     
      (note) Files HG00096_dbSNP_recalibrated.bam and HG00096_dbSNP_recalibrated.bai are created in the directory “machine”.  <br><br> 
 
-     ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___     
-      
+     ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___      
+     
      (note) Files HG00096_pseudoDB_recalibrated.bam and HG00096_pseudoDB_recalibrated.bai are created in the directory “machine”.  <br><br> 
      
      
@@ -254,11 +254,12 @@ https://www.internationalgenome.org/data-portal/sample
 	  Format: gatk.qs_recal(“species_name”, “reference”, “name of database”, “db_type”)   
     ```
       
-     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”)___   
-  
+     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”)___     
+     
      (note) Files human_dbSNP_recalibrated.bam and human_dbSNP_recalibrated.bai are created in the directory “machine”.  <br><br> 
 
      ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”)___    
+     
      (note) Files human_pseudoDB_recalibrated.bam and human_pseudoDB_recalibrated.bai are created in the directory “machine”.   
 
     
@@ -270,7 +271,7 @@ https://www.internationalgenome.org/data-portal/sample
 	  Format: gatk.variant_call(“species_name”, “reference”, “db_type”)   
     ```
   
- 	   ___>>>gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“dbSNP”)___  
+     ___>>>gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“dbSNP”)___  
   
      Files “human_dbSNP_variant_calling.vcf” and “human_dbSNP_variant_calling.vcf.idx” are created in the directory “variants”.   <br><br>
   
