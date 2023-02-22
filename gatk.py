@@ -166,7 +166,7 @@ def variant_call(species, reference_file, dbtype):
         sample_list=sample_list + f"-I {home_path}/{species}/module/machine/{sample[i]} "
     sample_list=sample_list + f"-o {home_path}/{species}/module/variants/{species}_{dbtype}_variant_calling.vcf --genotype_likelihoods_model BOTH &> {home_path}/{species}/module/variants/{species}_{dbtype}_variant_calling.vcf.log"
 
-    os.system(f"java -jar {home_path}{GATK}  -T UnifiedGenotyper -R {home_path}{species}/data/ref/{reference_file} {sample_list }" );
+    os.system(f"java -jar {home_path}{GATK}  -T UnifiedGenotyper -R {home_path}/{species}/data/ref/{reference_file} {sample_list }" );
 
 # end of variant_call()
 
