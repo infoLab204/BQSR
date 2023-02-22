@@ -55,7 +55,7 @@ ___$bunzip2 GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2___      &nbsp;&nbsp;&nbs
 ___$tar xvf GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar___   
 ___$mv GenomeAnalysisTK-3.8-1-0-gf15c1c3ef  gatk___         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# change directory name   
 
-	(note) The up-to-date version of GATK is gatk-4.3.0.0 (Oct 12, 2022, https://github.com/broadinstitute/gatk/releases/). 
+	
 <br><br><br> 
 ## Part II: Data download
 1. Create directories  
