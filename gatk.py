@@ -128,7 +128,8 @@ def qs_recal(*recal) :
     vcf_list=os.listdir(vcf_dir)
 
     if database not in vcf_list :
-        sys.exit("Not found database")
+        print("Not found database")		
+        return
 
     if database in vcf_list and ".gz" in database :
         os.system(f"gzip -d {home_path}/{species}/data/db/{database}")
@@ -195,6 +196,18 @@ def pseudo_db(species, reference_file):
 
 
 def error_rate(species, sample, reference_file, database, dbtype) :
+    ## database check
+    vcf_dir=f"{home_path}/{species}/data/db"
+    vcf_list=os.listdir(vcf_dir)
+
+    if database not in vcf_list :
+        print("Not found database")		
+        return 
+
+    if database in vcf_list and ".gz" in database :
+        os.system(f"gzip -d {home_path}/{species}/data/db/{database}")
+        database=database[:database.find(".gz")]
+
     os.system(f"{home_path}{SAMTOOLS}/samtools mpileup -Bf {home_path}/{species}/data/ref/{reference_file} {home_path}/{species}/module/align/{sample}_aligned.bam > {home_path}/{species}/module/error/{sample}_error\n")
     
     infile_name=f"{home_path}/{species}/module/error/{sample}_error"  # mileup output file load
@@ -252,17 +265,7 @@ def error_rate(species, sample, reference_file, database, dbtype) :
     outfile.close()
     
 	
-    ## database check
-    vcf_dir=f"{home_path}/{species}/data/db"
-    vcf_list=os.listdir(vcf_dir)
-
-    if database not in vcf_list :
-        sys.exit("Not found database")
-
-    if database in vcf_list and ".gz" in database :
-        os.system(f"gzip -d {home_path}/{species}/data/db/{database}")
-        database=database[:database.find(".gz")]
-
+   
     ## database unique position check
     db_name=f"{home_path}/{species}/data/db/{database}"
     db_uniq_check=f"{home_path}/{species}/data/db/{species}_{dbtype}_uniq_pos"
