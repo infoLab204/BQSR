@@ -150,7 +150,7 @@ https://www.internationalgenome.org/data-portal/sample
     *	___pseudo_db( )___: construct pseudo-database    
     *	___qs_recal( )___: recalibrate base quality score   
     *	___variant_call( )___: call genetic variants   
-    *	___error_tate()____ : estimate error rate of sample   
+    *	___error_rate()____ : estimate error rate of sample   
     *	___qs_model( )___: estimate model-adjusted base quality score   
 
     (note) execute the above functions at directory “tools”.
