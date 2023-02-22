@@ -20,7 +20,7 @@ ___$mkdir tools___
     *	__Picard__: https://github.com/broadinstitute/pocard/releases/
     *	__GATK__: https://github.com/broadinstitute/gatk/releases/    
     
-    (note) The dependent libraries (e.g., bzip2-devel, ncurses-devel, xz-devel, zlib-devel, and curl-devel) should be installed before installing BWA and Samtools. 
+    (note) BWA and Samtools may require libraries (e.g., bzip2-devel, ncurses-devel, xz-devel, zlib-devel, and curl-devel, etc) installed depending on the open source linux operating system.    
 3.	Download and install BWA(Burrows-Wheeler Aligner) using the following commands.  
 ___$wget https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.12.tar.bz2___       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download  
 ___$bunzip2 bwa-0.7.12.tar.bz2___  	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# unzip and untar file  
@@ -191,34 +191,36 @@ https://www.internationalgenome.org/data-portal/sample
     *	GRCh38_full_analysis_set_plus_decoy_hla.dict 
 <br>
 
-5.	Align sample FASTQ file to the reference.   
+5.	Align FASTQ file of single sample (Case 1) or all samples (Case 2) to the reference.    
 
-    ```
-    Format: gatk.align_fastq(“species_name”, “reference”, [“sample_name”])   
-    ```
-    (note) The name of each sample in the “fastq” directory should be given when samples are aligned one by one. On the other hand, when sample names are not given, all samples are aligned at once.    
-    <br>
+     ___Case 1 : align single sample___     
      
-     ___Case 1: sample name is given___    
-     
-	___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)___   
+    ```
+    Format: gatk.align_fastq(“species_name”, “reference”, “sample_name”)   
+    ```
+    ___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”,”HG00096”)___   
   
-    Files HG00096_aligned.bam and HG00096_aligned.bai are created in the directory “align”.     
-    <br>
-    
-    ___Case 2: sample name is not given___    
-    
-	___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
+    (note) Files HG00096_aligned.bam and HG00096_aligned.bai are created in the directory “align” with a sample HG00096.    <br>        
 
-    (note) With given all human samples, human_sample_aligned.bam and human_sample_aligned.bai are created in the directory “align”.
+    <br>
+
+     ___Case 2 : align all samples___           
+    
+    ```
+    Format: gatk.align_fastq(“species_name”, “reference”)   
+    ```
+    
+    ___>>>gatk.align_fastq(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
+
+    (note) Files human_aligned.bam and human_aligned.bai are created in the directory “align” with all human samples.    
 <br>
 
 
-6.	Create a pseudo database.   
+6.	Construct a pseudo database.   
     ```
     Format: gatk.pseudo_db(“species_name”, “reference”)   
     ```
-    (note) Construct the pseudoDB using all samples in the “align” directory.    
+    (note) Constructed pseudoDB used all samples in the “align” directory.        
     <br>
     
     ___>>>gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___   
@@ -227,35 +229,37 @@ https://www.internationalgenome.org/data-portal/sample
     
 <br>
 
-7.	Recalibrate machine-provided base quality score.   
+7.	Recalibrate machine-provided base quality score from single sample (Case 1) or all samples (Case 2).    
+
+     ___Case 1 : recalibrate single sample___   
 
     ```
-	  Format: gatk.qs_recal(“species_name”, “reference”, “name of database”, “db_type”, [“sample_name”])   
+	  Format: gatk.qs_recal(“species_name”, “reference”, “name of database”, “db_type”, “sample_name”)   
     ```
     
-    (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   
-    (note) The name of each sample in the “align” directory should be given when samples are recalibrated one by one. On the other hand, when sample names are not given, all samples are recalibrated at once.    
-    <br>
-    ___Case 1: sample name is given___ 
-  
+    (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   <br><br>
+    
      ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___   
   
-     Files HG00096_dbSNP_recalibrated.bam and HG00096_dbSNP_recalibrated.bai are created in the directory “machine”.  <br><br> 
+     (note) Files HG00096_dbSNP_recalibrated.bam and HG00096_dbSNP_recalibrated.bai are created in the directory “machine”.  <br><br> 
 
-     ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___   
+     ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___     
+      
+     (note) Files HG00096_pseudoDB_recalibrated.bam and HG00096_pseudoDB_recalibrated.bai are created in the directory “machine”.  <br><br> 
+     
+     
+     ___Case 2 : recalibrate all samples___   
  
-     Files HG00096_pseudoDB_recalibrated.bam and HG00096_pseudoDB_recalibrated.bai are created in the directory “machine”.   
-     <br>
-     
-     ___Case 2: sample name is not given___    
-     
-    ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa” ,“dbSNP_b151.vcf”,“dbSNP”)___
+    ```
+	  Format: gatk.qs_recal(“species_name”, “reference”, “name of database”, “db_type”)   
+    ```
+      
+     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”)___   
+  
+     (note) Files human_dbSNP_recalibrated.bam and human_dbSNP_recalibrated.bai are created in the directory “machine”.  <br><br> 
 
-    (note) With given all human samples, human_dbSNP_recalibrated.bam and human_dbSNP_recalibrated.bai are created in the directory “machine”.    
-
-    ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa” ,“human_pseudoDB.vcf”,“pseudoDB”)___
-    
-    (note) With given human samples, human_pseudoDB_recalibrated.bam and human_pseudoDB_recalibrated.bai are created in the directory “machine”.
+     ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”)___    
+     (note) Files human_pseudoDB_recalibrated.bam and human_pseudoDB_recalibrated.bai are created in the directory “machine”.   
 
     
 <br>
