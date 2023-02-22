@@ -239,11 +239,11 @@ https://www.internationalgenome.org/data-portal/sample
     
     (note) The argument “db_type” can be either “dbSNP” or “pseudoDB”   <br><br>
     
-     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”,”HG00096”)___     
+     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”, “dbSNP”, ”HG00096”)___     
      
      (note) Files HG00096_dbSNP_recalibrated.bam and HG00096_dbSNP_recalibrated.bai are created in the directory “machine”.  <br><br> 
 
-     ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”,”HG00096”)___      
+     ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”, “pseudoDB”, ”HG00096”)___      
      
      (note) Files HG00096_pseudoDB_recalibrated.bam and HG00096_pseudoDB_recalibrated.bai are created in the directory “machine”.  <br><br> 
      
@@ -254,11 +254,11 @@ https://www.internationalgenome.org/data-portal/sample
 	  Format: gatk.qs_recal(“species_name”, “reference”, “name of database”, “db_type”)   
     ```
       
-     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”,“dbSNP”)___     
+     ___>>>gatk.qs_recal(“human”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”, “dbSNP”)___     
      
      (note) Files human_dbSNP_recalibrated.bam and human_dbSNP_recalibrated.bai are created in the directory “machine”.  <br><br> 
 
-     ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”,“pseudoDB”)___    
+     ___>>>gatk.qs_recal(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”, “pseudoDB”)___    
      
      (note) Files human_pseudoDB_recalibrated.bam and human_pseudoDB_recalibrated.bai are created in the directory “machine”.   
 
@@ -271,11 +271,11 @@ https://www.internationalgenome.org/data-portal/sample
 	  Format: gatk.variant_call(“species_name”, “reference”, “db_type”)   
     ```
   
-     ___>>>gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“dbSNP”)___  
+     ___>>>gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP”)___  
   
      Files “human_dbSNP_variant_calling.vcf” and “human_dbSNP_variant_calling.vcf.idx” are created in the directory “variants”.   <br><br>
   
-     ___>>>gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”,“pseudoDB”)___   
+     ___>>>gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “pseudoDB”)___   
   
      FIles “human_pseudoDB_variant_calling.vcf” and “human_pseudoDB_variant_calling.vcf.idx” are created in the directory “variants”.   
     
