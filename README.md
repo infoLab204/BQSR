@@ -225,7 +225,7 @@ https://www.internationalgenome.org/data-portal/sample
     
     ___>>>gatk.pseudo_db(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”)___       
     
-      File “human_pseudoDB.vcf” and “human_pseudoDB.vcf.idx” are created in the directory “db”.    
+    (note) File “human_pseudoDB.vcf” and “human_pseudoDB.vcf.idx” are created in the directory “db”.    
     
 <br>
 
@@ -273,11 +273,11 @@ https://www.internationalgenome.org/data-portal/sample
   
      ___>>>gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP”)___  
   
-     Files “human_dbSNP_variant_calling.vcf” and “human_dbSNP_variant_calling.vcf.idx” are created in the directory “variants”.   <br><br>
+     (note) Files “human_dbSNP_variant_calling.vcf” and “human_dbSNP_variant_calling.vcf.idx” are created in the directory “variants”.   <br><br>
   
      ___>>>gatk.variant_call(“human”,“GRCh38_full_analysis_set_plus_decoy_hla.fa”, “pseudoDB”)___   
   
-     FIles “human_pseudoDB_variant_calling.vcf” and “human_pseudoDB_variant_calling.vcf.idx” are created in the directory “variants”.   
+    (note) FIles “human_pseudoDB_variant_calling.vcf” and “human_pseudoDB_variant_calling.vcf.idx” are created in the directory “variants”.   
     
 <br>
 
@@ -288,11 +288,11 @@ https://www.internationalgenome.org/data-portal/sample
     ```
     ___>>>gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “dbSNP_b151.vcf”, “dbSNP”)___   
     
-    File “HG00096_dbSNP_erate” is created in the directory “error”.   <br><br>
+    (note) File “HG00096_dbSNP_erate” is created in the directory “error”.   <br><br>
     
     ___>>>gatk.error_rate(“human”,“HG00096”, “GRCh38_full_analysis_set_plus_decoy_hla.fa”, “human_pseudoDB.vcf”, “pseudoDB”)___   
     
-    File “HG00096_pseudoDB_erate” is created in the directory “error”.
+    (note) File “HG00096_pseudoDB_erate” is created in the directory “error”.
   
   <br>
 
@@ -304,11 +304,11 @@ https://www.internationalgenome.org/data-portal/sample
   
       ___>>>gatk.qs_model(“human”,“HG00096”, “dbSNP”)___   
   
-      File “HG00096_dbSNP_qs” is created in the directory “model”   <br><br>
+      (note) File “HG00096_dbSNP_qs” is created in the directory “model”   <br><br>
   
       ___>>>gatk.qs_model(“human”,“HG00096”, “pseudoDB”)___  
   
-      File “HG00096_pseudoDB_qs” is created in directory “model”   
+      (note) File “HG00096_pseudoDB_qs” is created in directory “model”   
   
 <br><br>
 ####  End of tutorial  
